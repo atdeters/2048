@@ -7,6 +7,8 @@
 #include "state_play.h"
 #include "state_menu.h"
 
+#include "locale.h"
+
 uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
 }
@@ -22,6 +24,7 @@ void init(Data *data) {
 
     // Initialize ncurses
     srand(time(NULL));
+    setlocale(LC_ALL, "");
     initscr();              // Like mlx_init for ncurses basically
     cbreak();               // Disable line buffering (So you don't need to press enter to get a key input)
     noecho();               // Do not display typed characters

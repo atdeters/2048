@@ -1,8 +1,8 @@
-SRC = main.c game.c state_play.c state_menu.c
+SRC = main.c game.c state_play.c state_menu.c helpers.c
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -MMD -MP
-LDFLAGS = -lncurses
+LDFLAGS = -lncursesw
 NAME = 2048
 
 all: $(OBJ)
