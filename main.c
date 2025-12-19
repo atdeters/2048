@@ -4,9 +4,17 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <unistd.h>
 
 #define CHANCE_4 5
+
+enum e_states {
+    MENU,
+    GAME,
+};
+
+enum e_const {
+    WIN_VALUE = 2048
+};
 
 typedef struct s_data {
     uint8_t grid_size;
@@ -36,10 +44,7 @@ void run(Game *game) {
     Data data = {0};
     init_d(&data);
     while(true) {
-        (void)game;
-        printf("Field Index = %d\n", game->get_rand_pos(&data));
-        printf("Number = %d\n", game->get_rand_nb());
-        usleep(500);
+
     }
 }
 
