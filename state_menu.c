@@ -5,11 +5,14 @@
 void menu(Data *data) {
     getmaxyx(stdscr, data->max_y, data->max_x);
     while(true) {
+        printw("In menu\n");
+        refresh();
         int ch = getch();
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->max_y, data->max_x);
+            clear();
             printw("max_x: %d max_y: %d\n", data->max_x, data->max_y);
-            refresh();
+			refresh();
         }
         if (DEBUG && ch == '1') {
             data->state = ST_PLAY;

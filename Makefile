@@ -13,6 +13,7 @@ all: $(OBJ)
 
 clean:
 	@rm -rf $(OBJ)
+	@rm -rf *.d
 
 fclean: clean
 	@rm -rf $(NAME)

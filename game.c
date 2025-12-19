@@ -14,6 +14,14 @@ uint8_t get_rand_nb(void) {
 uint8_t get_rand_pos(Data *data) {
     return (rand() % (data->grid_size * data->grid_size));
 }
+//			0			1			2			4			5			6			7			8			9			10			...
+// grid => [0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000]
+
+uint8_t read_nb(uint8_t x, uint8_t y, uint8_t *grid, uint8_t grid_size) {
+	uint8_t	nb = 0;
+
+	nb = ()
+}
 
 void init(Data *data) {
     // Initialize game data
