@@ -18,6 +18,9 @@ uint8_t get_rand_pos(Data *data) {
 }
 
 void init(Data *data) {
+
+	if (!is_power_of_2(WIN_VALUE))
+		exit(1);
     // Initialize game data
     data->grid_size = 4;
     data->state = ST_MENU;
