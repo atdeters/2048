@@ -10,7 +10,8 @@
 #include "../inc/colors.h"
 
 #define INIT_GRID_SIZE 4
-#define INIT_LOOSING_COND true
+#define INIT_LOOSING_COND false
+#define LOSE_INSTANT false
 
 static uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
@@ -58,7 +59,11 @@ void init_data(Data *data, uint8_t grid_size) {
     if (INIT_LOOSING_COND) {
         size_t count = 0;
         unsigned int nb = 2;
-        for (size_t i = 0; i < (grid_size * grid_size); i++) {
+        unsigned int empty = 1;
+        if (LOSE_INSTANT) {
+            empty = 0;
+        }
+        for (size_t i = 0; i < (grid_size * grid_size) - empty; i++) {
             add_nb_to_grid(data, count, nb);
             nb *= 2;
             count++;
