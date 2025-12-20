@@ -26,9 +26,8 @@ void	fill_stack(uint8_t *stack, unsigned int **grid, uint8_t i, uint8_t grid_siz
 }
 
 void	evaluate_stack(uint8_t *stack, uint8_t i, uint8_t grid_size) {
-	uint8_t			cur_ind = 0;
-	unsigned int	top = -1;
-	unsigned int	next = -1;
+	unsigned int	top = 0;
+	unsigned int	next = 0;
 
 	if (grid_size == 1)
 		return ;
@@ -44,14 +43,14 @@ void	evaluate_stack(uint8_t *stack, uint8_t i, uint8_t grid_size) {
 			break ;
 		}
 	}
-	if (top == -1 && next == -1) {
+	if (top == 0 && next == 0) {
 		return ;
 	}
-	else if (top > -1 && next == -1) {
+	else if (top > 0 && next == 0) {
 		*stack = top;
 		*(stack + 1) = 0; // NOT SURE ABOUT THIS.
 	}
-	else if (top > -1 && next > -1 && top == next) {
+	else if (top > 0 && next > 0 && top == next) {
 		*stack = top * 2;
 		*(stack + 1) = 0; // THIS TOO :D
 		stack++;
