@@ -1,5 +1,6 @@
 #include "../inc/set.h"
 #include <sys/types.h>
+#include <ncurses.h>
 
 void init_set(Set *set, uint8_t set_size) {
     (*set).idx = 0;
@@ -51,3 +52,9 @@ void set_update_size(Set *set, uint8_t size) {
         (*set).set_size = size;
 }
 
+void display_set(Set *set) {
+    for (int i = 0; i <= (*set).idx; i++) {
+        printw("|%u|", (*set).container[i]);
+    }
+    printw("\n");
+}

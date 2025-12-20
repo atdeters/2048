@@ -11,12 +11,20 @@
 
 #define INIT_GRID_SIZE 4
 
-uint8_t get_rand_nb(void) {
+static uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
 }
 
-uint8_t get_rand_pos(Data *data) {
-    return (rand() % (data->grid_size * data->grid_size));
+static uint8_t get_rand_pos(Data *data) {
+
+    uint8_t pos = data->empty_fields.container[rand() % (data->empty_fields.idx + 1)];
+    set_remove(&data->empty_fields, pos);
+    return pos;
+}
+
+void add_rnd(Data *data) {
+    uint8_t pos = get_rand_pos(data);
+    add_nb_to_grid(data, pos, get_rand_nb());
 }
 
 void init(Data *data) {
@@ -67,8 +75,9 @@ void init(Data *data) {
     init_pair(P12, COLOR_BLACK, CL12);
     init_pair(P13, COLOR_BLACK, CL13);
 
-    // Fill with first two random numbers
+    // Add first, second gets added in game loop
     init_set(&data->empty_fields, INIT_GRID_SIZE * INIT_GRID_SIZE);
+    add_rnd(data);
 }
 
 

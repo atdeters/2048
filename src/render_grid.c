@@ -1,8 +1,7 @@
-#include "state_play.h"
-#include "game.h"
 #include <stdint.h>
+#include "../inc/render_grid.h"
 #include <ncursesw/curses.h>
-#include "colors.h"
+#include "../inc/colors.h"
 
 
 short	get_color(unsigned int nb)
@@ -36,15 +35,12 @@ short	get_color(unsigned int nb)
 	return P9;
 }
 
-
 void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
 {
 	int start_x = 1 + x * (cell->w + 1);
 	int start_y = 1 + y * (cell->h + 1);
 
 /*  	printw("\n\nstart: %i\tend:%i\n", start, end);*/
-
-
 	short color = get_color(grid_num);
 
 	move(start_y, start_x);
@@ -52,11 +48,7 @@ void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
 		move(start_y + row, start_x);
 		chgat(cell->w, A_NORMAL, color, NULL);
 	}
-
-
 }
-
-
 
 void	color_grid(Data *data, Cell *cell)
 {

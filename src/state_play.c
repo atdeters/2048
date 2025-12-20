@@ -1,26 +1,21 @@
 #include "../inc/state_play.h"
+#include "../inc/render_grid.h"
 #include "../inc/game.h"
-#include "../inc/colors.h"
 #include <ncurses.h>
 #include <stdint.h>
 #include <ncursesw/curses.h>
 
-
 void play(Data *data) {
-
-    // put 2 random nums in grid
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
-    render_grid(data, &data->cell);
-
     while(true) {
+        add_rnd(data);
+        render_grid(data, &data->cell);
+        refresh();
         int ch = getch();
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
-            render_grid(data, &data->cell);  			// calcs cell_w & cell_h
 			//move_and_merge_numbers();
-
-
-			refresh();
+            continue;
         }
         // if (MO)
         if (ch == '0') {
@@ -31,6 +26,5 @@ void play(Data *data) {
             data->state = ST_EXIT;
             return;
         }
-
     }
 }

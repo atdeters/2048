@@ -23,6 +23,7 @@ enum e_const {
     WIN_VALUE = 2048
 };
 
+void add_rnd(Data *data);
 void init(Data *data);
 void run(Data *data);
 

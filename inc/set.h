@@ -17,6 +17,7 @@ bool set_contains(Set *set, uint8_t nb);
 void set_remove(Set *set, uint8_t nb);
 void set_insert(Set *set, uint8_t nb);
 void set_update_size(Set *set, uint8_t size);
+void display_set(Set *set);
 
 #endif // !SET_C
 

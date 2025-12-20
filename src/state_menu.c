@@ -1,9 +1,10 @@
-#include "state_menu.h"
-#include "game.h"
+#include "../inc/state_menu.h"
+#include "../inc/game.h"
 #include <ncurses.h>
 
 void menu(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
+    clear();
     while(true) {
         int ch = getch();
 		if (ch == '\x1B') {
@@ -19,6 +20,5 @@ void menu(Data *data) {
             data->state = ST_PLAY;
             return;
         }
-
     }
 }

@@ -2,6 +2,8 @@
 #include "../inc/data.h"
 #include <stdint.h>
 
+#include <stdlib.h>
+
 uint16_t min(uint16_t a, uint16_t b) {
     if (a < b)
         return a;
