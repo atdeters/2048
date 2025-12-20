@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <time.h>
+#include "locale.h"
 #include "../inc/data.h"
 #include "../inc/game.h"
 #include "../inc/state_play.h"
 #include "../inc/state_menu.h"
-
-#include "locale.h"
+#include "../inc/colors.h"
 
 uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
@@ -34,10 +34,38 @@ void init(Data *data) {
     noecho();               // Do not display typed characters
     keypad(stdscr, TRUE);   // Enable function keys (like arrow keys)
     curs_set(0);            // Hide cursor on screen (usually it is blinking in the shell)
-    if (has_colors()) {
-        start_color();
-    }
+
+    // Colors
+    start_color();          // TODO: Check if this is dangerous if terminal doesnt allow colors
+    init_color_hex(CL1, COL1);
+    init_color_hex(CL2, COL2);
+    init_color_hex(CL3, COL3);
+    init_color_hex(CL4, COL4);
+    init_color_hex(CL5, COL5);
+    init_color_hex(CL6, COL6);
+    init_color_hex(CL7, COL7);
+    init_color_hex(CL8, COL8);
+    init_color_hex(CL9, COL9);
+    init_color_hex(CL10, COL10);
+    init_color_hex(CL11, COL11);
+    init_color_hex(CL12, COL12);
+    init_color_hex(CL13, COL13);
+
+    init_pair(P1, COLOR_BLACK, CL1);
+    init_pair(P2, COLOR_BLACK, CL2);
+    init_pair(P3, COLOR_BLACK, CL3);
+    init_pair(P4, COLOR_BLACK, CL4);
+    init_pair(P5, COLOR_BLACK, CL5);
+    init_pair(P6, COLOR_BLACK, CL6);
+    init_pair(P7, COLOR_BLACK, CL7);
+    init_pair(P8, COLOR_BLACK, CL8);
+    init_pair(P9, COLOR_BLACK, CL9);
+    init_pair(P10, COLOR_BLACK, CL10);
+    init_pair(P11, COLOR_BLACK, CL11);
+    init_pair(P12, COLOR_BLACK, CL12);
+    init_pair(P13, COLOR_BLACK, CL13);
 }
+
 
 void quit(void) {
     endwin();

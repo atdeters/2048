@@ -4,6 +4,7 @@
 
 void menu(Data *data) {
     getmaxyx(stdscr, data->max_y, data->max_x);
+    clear();
     while(true) {
         int ch = getch();
 		if (ch == '\x1B') {
@@ -19,6 +20,5 @@ void menu(Data *data) {
             data->state = ST_PLAY;
             return;
         }
-
     }
 }
