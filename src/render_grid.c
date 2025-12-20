@@ -2,76 +2,76 @@
 #include "game.h"
 #include <stdint.h>
 #include <ncursesw/curses.h>
+#include "colors.h"
 
-int	get_end(int nb, Cell *cell)
+
+short	get_color(unsigned int nb)
 {
-	if (nb == 0)
-		return(cell->h);
-	if (nb == 1)
-		return(2 * cell->h + 1);
-	if (nb == 2)
-		return(3 * cell->h + 2);
-	if (nb == 3)
-		return(4 * cell->h + 3);
-	else
-		return(5 * cell->h + 4);
-
+	if (nb == (1 << 1))
+		return P1;
+	if (nb == (1 << 2))
+		return P2;
+	if (nb == (1 << 3))
+		return P3;
+	if (nb == (1 << 4))
+		return P4;
+	if (nb == (1 << 5))
+		return P5;
+	if (nb == (1 << 6))
+		return P6;
+	if (nb == (1 << 7))
+		return P7;
+	if (nb == (1 << 8))
+		return P8;
+	if (nb == (1 << 9))
+		return P9;
+	if (nb == (1 << 10))
+		return P10;
+	if (nb == (1 << 11))
+		return P11;
+	if (nb == (1 << 12))
+		return P12;
+	if (nb == (1 << 13))
+		return P13;
+	return P9;
 }
 
-int	get_start(int nb, Cell *cell)
+
+void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
 {
-	if (nb == 0)
-		return(0);
-	if (nb == 1)
-		return(cell->w + 1);
-	if (nb == 2)
-		return(2 * cell->w + 2);
-	if (nb == 3)
-		return(3 * cell->w + 3);
-	else
-		return(4 * cell->w + 4);
-}
+	int start_x = 1 + x * (cell->w + 1);
+	int start_y = 1 + y * (cell->h + 1);
 
-void	color_cell(Data *data, unsigned int grid_num, Cell *cell, int x, int y)
-{
-	int j = 0;
-	int i = get_end(y, cell);
-	(void) grid_num;
-	(void) data;
+/*  	printw("\n\nstart: %i\tend:%i\n", start, end);*/
 
 
-	while (i <= cell->h)
-	{
-		j = get_start(x, cell);
-		while (j <= cell->w)
-		{
+	short color = get_color(grid_num);
 
-			j++;
-		}
-		i++;
+	move(start_y, start_x);
+	for (int row = 0; row < cell->h; row++){
+		move(start_y + row, start_x);
+		chgat(cell->w, A_NORMAL, color, NULL);
 	}
-	return ;
+
+
 }
 
 
 
 void	color_grid(Data *data, Cell *cell)
 {
-	(void) data;
-	(void) cell;
+
 	int		x = 0;
 	int y = 0;
 
-	while (y < data->grid_size - 1) // loops through each cell per col
+	while (y < data->grid_size) // loops through each cell per col
 	{
 		x = 0;
-		while (x < data->grid_size - 1) // loops through each cell per row
+		while (x < data->grid_size) // loops through each cell per row
 		{
-			color_cell(data, data->grid[y][x], cell, x, y);
+			color_cell(data->grid[y][x], cell, x, y);
 			x++;
 		}
-
-
 		y++;
 	}
 	// Loop through col 0 - grid_size - 1
@@ -147,7 +147,7 @@ void render_grid(Data *data, Cell *cell)
             mvaddch(y, x++, '-');
     }
     mvaddch(y, x, '+');
-
+	color_grid(data, &data->cell);				// fills cells with different colors
     refresh();
 }
 
