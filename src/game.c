@@ -20,6 +20,7 @@ static int8_t get_rand_pos(Data *data) {
         return -1;
     }
     int8_t pos = data->empty_fields.container[rand() % (data->empty_fields.idx + 1)];
+    set_remove(&data->empty_fields, pos);
     return pos;
 }
 
