@@ -12,8 +12,6 @@ void play(Data *data) {
         // Add nb, render grid and refresh
         add_rnd(data);
         render_grid(data, &data->cell);
-        move(1,1);
-        display_set(&data->empty_fields);
         refresh();
 
         // Get user event and do the actions
