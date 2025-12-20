@@ -6,7 +6,7 @@ void	bzero_stack(uint8_t *stack, uint8_t grid_size) {
 	}
 }
 
-void	fill_stack(uint8_t *stack, unsigned int **grid, uint8_t i, uint8_t grid_size, enum e_dir direction) {
+void	fill_stack(uint8_t *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
 	for (uint8_t x = 0; x < grid_size; x++) {
 		switch (direction) {
 			case LEFT:
@@ -28,15 +28,19 @@ void	fill_stack(uint8_t *stack, unsigned int **grid, uint8_t i, uint8_t grid_siz
 void	evaluate_stack(uint8_t *stack, uint8_t i, uint8_t grid_size) {
 	unsigned int	top = 0;
 	unsigned int	next = 0;
+	uint8_t			len_to_top = 0;
+	uint8_t			len_to_next = 0;
 
 	if (grid_size == 1)
 		return ;
 	for (uint8_t x = 0; x < grid_size; x++) {
 		if (stack[x]) {
 			top = stack[x];
+			len_to_top = x;
 			for (uint8_t y = x + 1; y < grid_size; y++) {
 				if (stack[y]) {
 					next = stack[y];
+					len_to_next = y;
 					break ;
 				}
 			}
@@ -48,17 +52,29 @@ void	evaluate_stack(uint8_t *stack, uint8_t i, uint8_t grid_size) {
 	}
 	else if (top > 0 && next == 0) {
 		*stack = top;
-		*(stack + 1) = 0; // NOT SURE ABOUT THIS.
+		if (len_to_top > 0)
+			*(stack + len_to_top) = 0;
+		if (len_to_next > 0)
+			*(stack + len_to_next) = 0;
 	}
 	else if (top > 0 && next > 0 && top == next) {
 		*stack = top * 2;
-		*(stack + 1) = 0; // THIS TOO :D
-		stack++;
+		if (len_to_top > 0)
+			*(stack + len_to_top) = 0; // THIS TOO :D
+		if (len_to_next > 0)
+			*(stack + len_to_next) = 0;
+	}
+	else if (top > 0 && next > 0 && top != next) {
+		*stack = top;
+		if (len_to_top > 0)
+			*(stack + len_to_top) = 0;
+		if (len_to_next > 0 && *(stack + len_to_next) == 0)
+			*(stack + len_to_next) = 0;
 	}
 	evaluate_stack(stack + 1, i, grid_size - 1);
 }
 
-void	store_stack(uint8_t *stack, unsigned int **grid, uint8_t i, uint8_t grid_size, enum e_dir direction) {
+void	store_stack(uint8_t *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
 	for (uint8_t x = 0; x < grid_size; x++) {
 		switch (direction) {
 			case LEFT:
@@ -77,7 +93,7 @@ void	store_stack(uint8_t *stack, unsigned int **grid, uint8_t i, uint8_t grid_si
 	}
 }
 
-void    move_grid(unsigned int **grid, uint8_t grid_size, enum e_dir direction) {
+void    update_grid(unsigned int grid[5][5], uint8_t grid_size, enum e_dir direction) {
 	uint8_t	stack[grid_size];
 
     for (uint8_t i = 0; i < grid_size; i++) {
@@ -85,6 +101,31 @@ void    move_grid(unsigned int **grid, uint8_t grid_size, enum e_dir direction) 
 		fill_stack(stack, grid, i, grid_size, direction);
 		evaluate_stack(stack, i, grid_size);
 		store_stack(stack, grid, i, grid_size, direction);
-		// move_arr(grid[i], grid_size, direction);
 	}
 }
+
+// int main(void)
+// {
+// 	unsigned int grid[5][5] = {0};
+// 	grid[0][0] = 4;
+// 	grid[0][1] = 4;
+// 	grid[0][2] = 4;
+// 	grid[0][3] = 8;
+
+// 	printf("before:\n");
+// 	for (int i = 0; i < 4; i++) {
+// 		for (int x = 0; x < 4; x++) {
+// 			printf("%u", grid[i][x]);
+// 		}
+// 		printf("\n");
+// 	}
+// 	update_grid(grid, 4, RIGHT);
+// 	printf("=====\n");
+// 	printf("after:\n");
+// 	for (int i = 0; i < 4; i++) {
+// 		for (int x = 0; x < 4; x++) {
+// 			printf("%u", grid[i][x]);
+// 		}
+// 		printf("\n");
+// 	}
+// }
