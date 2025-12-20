@@ -9,6 +9,8 @@
 #include "../inc/state_menu.h"
 #include "../inc/colors.h"
 
+#define INIT_GRID_SIZE 4
+
 uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
 }
@@ -23,7 +25,7 @@ void init(Data *data) {
 		exit(1);
     // Initialize game data
 
-    data->grid_size = 4;
+    data->grid_size = INIT_GRID_SIZE;
     data->state = ST_MENU;
 
     // Initialize ncurses
@@ -64,6 +66,9 @@ void init(Data *data) {
     init_pair(P11, COLOR_BLACK, CL11);
     init_pair(P12, COLOR_BLACK, CL12);
     init_pair(P13, COLOR_BLACK, CL13);
+
+    // Fill with first two random numbers
+    init_set(&data->empty_fields, INIT_GRID_SIZE * INIT_GRID_SIZE);
 }
 
 
