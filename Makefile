@@ -22,7 +22,8 @@ SRCS = \
 	src/state_play.c \
 	src/render_grid.c \
 	src/grid_manipulation.c \
-	src/colors.c
+	src/colors.c \
+	src/set.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
