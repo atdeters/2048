@@ -24,7 +24,7 @@ void set_remove(Set *set, uint8_t nb) {
         return;
     }
     else {
-        size_t idx = 0;
+        int idx = 0;
         while ((*set).container[idx] != nb) {
             idx++;
         }
