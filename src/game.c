@@ -10,7 +10,7 @@
 #include "../inc/colors.h"
 
 #define INIT_GRID_SIZE 4
-#define INIT_LOOSING_COND true
+#define INIT_LOOSING_COND false
 #define LOSE_INSTANT false
 
 static uint8_t get_rand_nb(void) {
