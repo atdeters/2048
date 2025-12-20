@@ -12,11 +12,26 @@ void play(Data *data) {
         // Add nb, render grid and refresh
         add_rnd(data);
         render_grid(data, &data->cell);
+        move(1,1);
+        display_set(&data->empty_fields);
         refresh();
 
         // Get user event and do the actions
         int ch = getch();
 
+        if (ch == KEY_RESIZE) {
+            getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
+            //move_and_merge_numbers();
+            continue;
+        }
+        else if (ch == '0') {
+            data->state = ST_MENU;
+            return;
+        }
+        else if (ch == '\x1B') {
+            data->state = ST_EXIT;
+            return;
+        }
         if (ch == KEY_LEFT) {
             update_grid(data, LEFT);
         }
@@ -30,21 +45,5 @@ void play(Data *data) {
             update_grid(data, DOWN);
         }
         update_empty_fields(data);
-
-
-        // Special cases
-        if (ch == KEY_RESIZE) {
-            getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
-			//move_and_merge_numbers();
-            continue;
-        }
-        if (ch == '0') {
-            data->state = ST_MENU;
-            return;
-        }
-		if (ch == '\x1B') {
-            data->state = ST_EXIT;
-            return;
-        }
     }
 }

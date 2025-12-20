@@ -15,15 +15,19 @@ static uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
 }
 
-static uint8_t get_rand_pos(Data *data) {
-
-    uint8_t pos = data->empty_fields.container[rand() % (data->empty_fields.idx + 1)];
-    set_remove(&data->empty_fields, pos);
+static int8_t get_rand_pos(Data *data) {
+    if (data->empty_fields.idx == -1) {
+        return -1;
+    }
+    int8_t pos = data->empty_fields.container[rand() % (data->empty_fields.idx + 1)];
     return pos;
 }
 
 void add_rnd(Data *data) {
-    uint8_t pos = get_rand_pos(data);
+    int8_t pos = get_rand_pos(data);
+    if (pos == -1) {
+        return;
+    }
     add_nb_to_grid(data, pos, get_rand_nb());
 }
 
@@ -31,8 +35,8 @@ void update_empty_fields(Data *data) {
     set_clear(&data->empty_fields);
     for (size_t i = 0; i < data->grid_size; i++) {
         for (size_t j = 0; j < data->grid_size; j++) {
-            if (data->grid[i][j] != 0) {
-                set_insert(&data->empty_fields, data->grid[i][j]);
+            if (data->grid[i][j] == 0) {
+                set_insert(&data->empty_fields, i*data->grid_size+j);
             }
         }
     }

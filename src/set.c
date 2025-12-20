@@ -3,16 +3,19 @@
 #include <ncurses.h>
 
 void init_set(Set *set, uint8_t set_size) {
-    (*set).idx = 0;
-    while ((*set).idx < SET_CAPACITY && (*set).idx < set_size) {
-        (*set).container[(*set).idx] = (*set).idx;
+    (*set).idx = -1;
+    for (size_t i = 0; i < SET_CAPACITY && (*set).idx < set_size; i++) {
         (*set).idx++;
+        (*set).container[(*set).idx] = (*set).idx;
     }
     (*set).idx--;
     (*set).set_size = set_size;
 }
 
 bool set_contains(Set *set, uint8_t nb) {
+    if ((*set).idx == -1) {
+        return false;
+    }
     for (int i = 0; i <= (*set).idx; i++) {
         if ((*set).container[i] == nb)
             return true;
@@ -49,19 +52,23 @@ void set_update_size(Set *set, uint8_t size) {
     if (size > SET_CAPACITY) {
         size = SET_CAPACITY;
     }
-        (*set).set_size = size;
+    (*set).set_size = size;
 }
 
 void set_clear(Set *set) {
-    (*set).idx = 0;
+    (*set).idx = -1;
     for (size_t i = 0; i < SET_CAPACITY; i++) {
         (*set).container[i] = 0;
     }
 }
 
 void display_set(Set *set) {
+    if ((*set).idx == -1) {
+        printw("Set is empty!\n");
+        return;
+    }
     for (int i = 0; i <= (*set).idx; i++) {
-        printw("|%u|", (*set).container[i]);
+        printw("|%d|", (*set).container[i]);
     }
     printw("\n");
 }

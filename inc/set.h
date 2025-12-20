@@ -9,7 +9,7 @@
 typedef struct s_set {
     uint8_t container[SET_CAPACITY];
     uint8_t set_size;
-    uint8_t idx;
+    int idx;
 } Set;
 
 void init_set(Set *set, uint8_t set_size);
