@@ -1,5 +1,7 @@
 #include "../inc/state_play.h"
 #include "../inc/game.h"
+#include "../inc/colors.h"
+#include <ncurses.h>
 #include <stdint.h>
 #include <ncursesw/curses.h>
 

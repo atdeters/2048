@@ -20,7 +20,8 @@ SRCS = \
 	src/helpers.c \
 	src/state_menu.c \
 	src/state_play.c \
-	src/grid_manipulation.c
+	src/grid_manipulation.c \
+	src/colors.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
