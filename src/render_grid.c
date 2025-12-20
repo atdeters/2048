@@ -32,7 +32,7 @@ short	get_color(unsigned int nb)
 		return P12;
 	if (nb == (1 << 13))
 		return P13;
-	return P9;
+	return PBACK;
 }
 
 void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)

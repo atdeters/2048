@@ -13,8 +13,6 @@ void menu(Data *data) {
         }
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
-            printw("grid_max_x: %d grid_max_y: %d\n", data->grid_max_x, data->grid_max_y);
-            refresh();
         }
         if (DEBUG && ch == '1') {
             data->state = ST_PLAY;

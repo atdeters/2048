@@ -27,6 +27,17 @@ void add_rnd(Data *data) {
     add_nb_to_grid(data, pos, get_rand_nb());
 }
 
+void update_empty_fields(Data *data) {
+    set_clear(&data->empty_fields);
+    for (size_t i = 0; i < data->grid_size; i++) {
+        for (size_t j = 0; j < data->grid_size; j++) {
+            if (data->grid[i][j] != 0) {
+                set_insert(&data->empty_fields, data->grid[i][j]);
+            }
+        }
+    }
+}
+
 void init(Data *data) {
 
 	if (!is_power_of_2(WIN_VALUE))
@@ -60,6 +71,7 @@ void init(Data *data) {
     init_color_hex(CL11, COL11);
     init_color_hex(CL12, COL12);
     init_color_hex(CL13, COL13);
+    init_color_hex(BACKGROUND, COL_BACK);
 
     init_pair(P1, COLOR_BLACK, CL1);
     init_pair(P2, COLOR_BLACK, CL2);
@@ -74,16 +86,15 @@ void init(Data *data) {
     init_pair(P11, COLOR_BLACK, CL11);
     init_pair(P12, COLOR_BLACK, CL12);
     init_pair(P13, COLOR_BLACK, CL13);
+    init_pair(PBACK, BACKGROUND, BACKGROUND);
 
     // Add first, second gets added in game loop
     init_set(&data->empty_fields, INIT_GRID_SIZE * INIT_GRID_SIZE);
     add_rnd(data);
 }
 
-
 void quit(void) {
     endwin();
-
     exit(0);
 }
 

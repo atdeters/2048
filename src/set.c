@@ -52,6 +52,13 @@ void set_update_size(Set *set, uint8_t size) {
         (*set).set_size = size;
 }
 
+void set_clear(Set *set) {
+    (*set).idx = 0;
+    for (size_t i = 0; i < SET_CAPACITY; i++) {
+        (*set).container[i] = 0;
+    }
+}
+
 void display_set(Set *set) {
     for (int i = 0; i <= (*set).idx; i++) {
         printw("|%u|", (*set).container[i]);
