@@ -1,5 +1,5 @@
 #include "state_play.h"
-#include "data.h"
+#include "game.h"
 #include <stdint.h>
 #include <ncursesw/curses.h>
 
@@ -13,14 +13,14 @@ void draw_borders(Data *data) {
 
     clear();
     for (uint16_t k = 0; k < data->grid_size; k++) {
-        for (uint16_t i = 0; i < len; i++) {
-            printw("██");
+        for (uint16_t i = 0; i < 2*len; i++) {
+            printw("█");
         }
         addch('\n');
         for (uint16_t j = 0; j < block_size - 1; j++) {
-            for (uint16_t i = 0; i < len; i++) {
+            for (uint16_t i = 0; i < 2*len; i++) {
                 if (i % block_size == 0 || i == len - 1) {
-                    printw("██");
+                    printw("█");
                 }
                 else {
                     addch(' ');
@@ -50,6 +50,10 @@ void play(Data *data) {
         }
         if (DEBUG && ch == '0') {
             data->state = ST_MENU;
+            return;
+        }
+		if (DEBUG && ch == '\x1B') {
+            data->state = ST_EXIT;
             return;
         }
     }

@@ -6,6 +6,10 @@ void menu(Data *data) {
     getmaxyx(stdscr, data->max_y, data->max_x);
     while(true) {
         int ch = getch();
+		if (ch == '\x1B') {
+            data->state = ST_EXIT;
+            return;
+        }
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->max_y, data->max_x);
             printw("max_x: %d max_y: %d\n", data->max_x, data->max_y);
@@ -15,5 +19,6 @@ void menu(Data *data) {
             data->state = ST_PLAY;
             return;
         }
+
     }
 }

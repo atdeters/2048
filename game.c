@@ -40,6 +40,7 @@ void init(Data *data) {
 
 void quit(void) {
     endwin();
+
     exit(0);
 }
 
