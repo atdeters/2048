@@ -1,6 +1,10 @@
 #ifndef DATA_H
 # define DATA_H
 
+# ifndef DEBUG
+#  define DEBUG false
+# endif
+
 # include <stdint.h>
 # include <stdbool.h>
 

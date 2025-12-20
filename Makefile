@@ -1,23 +1,35 @@
-SRC = main.c game.c state_play.c state_menu.c helpers.c
-OBJ = $(SRC:.c=.o)
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -MMD -MP
-LDFLAGS = -lncursesw
-NAME = 2048
+NAME        = 2048
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror
+DEBUG_FLAGS = -g -O0 -DDEBUG=true
 
-all: $(OBJ)
-	@$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
+SRC_DIR     = src
+OBJ_DIR     = obj
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+INC_DIR     = inc
+INCLUDES    = -I$(INC_DIR)
 
-clean:
-	@rm -rf $(OBJ)
+LIBFT_DIR   = inc/libft
+LIBFT       = $(LIBFT_DIR)/libft.a
 
-fclean: clean
-	@rm -rf $(NAME)
+LDLIBS      = -lncurses
 
-re: fclean all
+SRCS = \
+	src/main.c \
+	src/game.c \
+	src/helpers.c \
+	src/state_menu.c \
+	src/state_play.c
+
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+DEPS = $(OBJS:.o=.d)
+DEPFLAGS = -MMD -MP
+
+all: $(LIBFT) $(NAME)
+
+debug: CFLAGS += $(DEBUG_FLAGS)
+debug: re
+	@./2048
 
 run: all
 	@./2048
@@ -25,6 +37,27 @@ run: all
 valgrind: all
 	@valgrind ./2048
 
-.PHONY: all clean fclean re run valgrind
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/data.h
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(DEPFLAGS) $(INCLUDES) -c $< -o $@
 
--include $(OBJS:.o=.d)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDLIBS) -o $(NAME)
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR) all
+
+clean:
+	@rm -f $(OBJS) $(DEPS)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+
+fclean: clean
+	@rm -f $(NAME)
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+
+re: fclean all
+
+-include $(DEPS)
+
+.PHONY: all verbose run valgrind clean fclean re
