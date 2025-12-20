@@ -12,5 +12,6 @@ void add_nb_to_grid(Data *data, uint8_t field_nb, uint8_t value);
 void test_filling_grid(Data *data);
 void display_grid(Data *data);
 void add_rnd(Data *data);
+bool is_lost(Data *data);
 
 #endif // ! HELPERS_C

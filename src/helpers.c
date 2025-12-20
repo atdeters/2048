@@ -73,3 +73,20 @@ void display_grid(Data *data) {
     }
     refresh();
 }
+
+bool is_lost(Data *data) {
+    for (size_t i = 0; i < data->grid_size - 1; i++) {
+        for (size_t j = 0; j < data->grid_size - 1; j++) {
+            if (data->empty_fields.idx != -1) {
+                return false;
+            }
+            if (data->grid[i][j] == data->grid[i][j+1]) {
+                return false;
+            }
+            if (data->grid[i][j] == data->grid[i+1][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}

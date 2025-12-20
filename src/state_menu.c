@@ -1,5 +1,4 @@
 #include "../inc/state_menu.h"
-#include "../inc/game.h"
 #include <ncurses.h>
 
 void menu(Data *data) {
@@ -14,7 +13,7 @@ void menu(Data *data) {
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
         }
-        if (DEBUG && ch == '1') {
+        if (ch == '1' || ch == 'p' || ch == 'r') {
             data->state = ST_PLAY;
             return;
         }
