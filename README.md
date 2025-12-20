@@ -10,4 +10,4 @@ Right: Arrow Right, D, L
 Other Keys:
 Open Menu: M, 0
 Play/Resume: P, 1
-Restart: R
+Restart: R, 2
