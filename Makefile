@@ -20,6 +20,7 @@ SRCS = \
 	src/helpers.c \
 	src/state_menu.c \
 	src/state_play.c \
+	src/render_grid.c \
 	src/grid_manipulation.c \
 	src/colors.c
 

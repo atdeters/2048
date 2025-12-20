@@ -10,13 +10,20 @@ enum e_states {
     ST_EXIT
 };
 
+typedef struct s_cell {
+
+    int	w;
+	int	h;
+}	Cell;
+
 typedef struct s_data {
     uint8_t grid_size;
     unsigned int grid[5][5];
     enum e_states state;
     bool has_colors;
-    uint16_t max_y;
-    uint16_t max_x;
+    uint16_t grid_max_y;
+    uint16_t grid_max_x;
+	Cell	cell;
 } Data;
 
 #endif // ! DATA_H

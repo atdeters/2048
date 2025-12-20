@@ -29,6 +29,8 @@ void run(Data *data);
 #include "helpers.h"
 #include "state_menu.h"
 #include "state_play.h"
+#include "render_grid.h"
+
 
 
 #endif // ! GAME_H
