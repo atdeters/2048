@@ -1,21 +1,4 @@
-#include <stdint.h>
-#include <stdlib.h>
-#include <ncurses.h>
-#include <time.h>
-#include "../inc/data.h"
 #include "../inc/game.h"
-#include "../inc/state_play.h"
-#include "../inc/state_menu.h"
-
-#include "locale.h"
-
-uint8_t get_rand_nb(void) {
-    return (rand() % 100 <= CHANCE_4 ? 4 : 2);
-}
-
-uint8_t get_rand_pos(Data *data) {
-    return (rand() % (data->grid_size * data->grid_size));
-}
 
 void	bzero_stack(uint8_t *stack, uint8_t grid_size) {
 	for (uint8_t i = 0; i < grid_size; i++) {
@@ -105,47 +88,4 @@ void    move_grid(unsigned int **grid, uint8_t grid_size, enum e_dir direction) 
 		store_stack(stack, grid, i, grid_size, direction);
 		// move_arr(grid[i], grid_size, direction);
 	}
-}
-
-void init(Data *data) {
-
-	if (!is_power_of_2(WIN_VALUE))
-		exit(1);
-    // Initialize game data
-
-    data->grid_size = 4;
-    data->state = ST_MENU;
-
-    // Initialize ncurses
-    srand(time(NULL));
-    setlocale(LC_ALL, "");
-    initscr();              // Like mlx_init for ncurses basically
-    cbreak();               // Disable line buffering (So you don't need to press enter to get a key input)
-    noecho();               // Do not display typed characters
-    keypad(stdscr, TRUE);   // Enable function keys (like arrow keys)
-    curs_set(0);            // Hide cursor on screen (usually it is blinking in the shell)
-    if (has_colors()) {
-        start_color();
-    }
-}
-
-void quit(void) {
-    endwin();
-
-    exit(0);
-}
-
-void run(Data *data) {
-    while(true) {
-        switch (data->state) {
-            case ST_MENU:
-                menu(data);
-                break;
-            case ST_PLAY:
-                play(data);
-                break;
-            case ST_EXIT:
-                quit();
-        }
-    }
 }
