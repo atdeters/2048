@@ -1,7 +1,7 @@
 #ifndef STATE_MENU_H
 # define STATE_MENU_H
 
-# include "game.h"
+# include "data.h"
 
 void menu(Data *data);
 

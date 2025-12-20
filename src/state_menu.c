@@ -1,5 +1,5 @@
-#include "state_menu.h"
-#include "game.h"
+#include "../inc/state_menu.h"
+#include "../inc/game.h"
 #include <ncurses.h>
 
 void menu(Data *data) {

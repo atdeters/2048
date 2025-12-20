@@ -1,5 +1,5 @@
-#include "data.h"
-#include "game.h"
+#include "../inc/data.h"
+#include "../inc/game.h"
 
 int main(void) {
     Data data = {0};

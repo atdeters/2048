@@ -1,4 +1,4 @@
-#include "helpers.h"
+#include "../inc/helpers.h"
 
 uint16_t min(uint16_t a, uint16_t b) {
     if (a < b)

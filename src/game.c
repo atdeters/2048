@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <time.h>
-#include "data.h"
-#include "game.h"
-#include "state_play.h"
-#include "state_menu.h"
+#include "../inc/data.h"
+#include "../inc/game.h"
+#include "../inc/state_play.h"
+#include "../inc/state_menu.h"
 
 #include "locale.h"
 

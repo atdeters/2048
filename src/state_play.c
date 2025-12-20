@@ -1,5 +1,5 @@
-#include "state_play.h"
-#include "game.h"
+#include "../inc/state_play.h"
+#include "../inc/game.h"
 #include <stdint.h>
 #include <ncursesw/curses.h>
 
