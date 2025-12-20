@@ -32,6 +32,12 @@ short	get_color(unsigned int nb)
 		return P12;
 	if (nb == (1 << 13))
 		return P13;
+	if (nb == (1 << 14))
+		return P14;
+	if (nb == (1 << 15))
+		return P15;
+	if (nb == (1 << 16))
+		return P16;
 	return PBACK;
 }
 

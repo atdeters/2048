@@ -74,20 +74,20 @@ void	evaluate_stack(uint8_t *stack, uint8_t i, uint8_t grid_size) {
 	evaluate_stack(stack + 1, i, grid_size - 1);
 }
 
-void	store_stack(uint8_t *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
+void store_stack(uint8_t *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
 	for (uint8_t x = 0; x < grid_size; x++) {
 		switch (direction) {
 			case LEFT:
-				grid[i][x] = stack[x];
+                grid[i][x] = stack[x];
 				break ;
 			case RIGHT:
-				grid[i][grid_size - 1 - x] = stack[x];
+                grid[i][grid_size - 1 - x] = stack[x];
 				break ;
 			case DOWN:
-				grid[grid_size - 1 - x][i] = stack[x];
+                grid[grid_size - 1 - x][i] = stack[x];
 				break ;
 			case UP:
-				grid[x][i] = stack[x];
+                grid[x][i] = stack[x];
 				break ;
 		}
 	}
@@ -115,6 +115,7 @@ void    update_grid(Data *data, enum e_dir direction) {
 		evaluate_stack(stack, i, data->grid_size);
 		store_stack(stack, data->grid, i, data->grid_size, direction);
 	}
+    update_empty_fields(data);
 }
 
 // int main(void)

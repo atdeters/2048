@@ -6,30 +6,28 @@
 #include <ncurses.h>
 #include <stdint.h>
 #include <ncursesw/curses.h>
+#include "stdlib.h"
 
 void play(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     while(true) {
-        // Add nb, render grid and refresh
-        add_rnd(data);
         render_grid(data, &data->cell);
-        refresh();
+
 
         if (is_lost(data)) {
             move(1,1);
             printw("You lost the game!\n");
-            // TODO: Add new state which is lost -> Back to menu or something
+            // TODO: Actually something happens now
         }
-
-        // Get user event and do the actions
+        // Get user input
         int ch = getch();
 
+        // Operational Keys
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
-            //move_and_merge_numbers();
             continue;
         }
-        else if (ch == '0' || ch == 'M' || ch == 'm') {
+        if (ch == '0' || ch == 'M' || ch == 'm') {
             data->state = ST_MENU;
             return;
         }
@@ -37,6 +35,22 @@ void play(Data *data) {
             data->state = ST_EXIT;
             return;
         }
+        else if (ch == '2' || ch == 'r' || ch == 'R') {
+            data->state = ST_RESTART;
+            return;
+        }
+
+
+
+
+        // Temporary grid
+        unsigned int tmp[5][5];
+        for (size_t i = 0; i < 5; i++) {
+            for (size_t j = 0; j < 5; j++) {
+                tmp[i][j] = data->grid[i][j];
+            }
+        }
+
         if (ch == KEY_LEFT || ch == 'a' || ch == 'A' || ch == 'h' || ch == 'H') {
             update_grid(data, LEFT);
         }
@@ -49,10 +63,20 @@ void play(Data *data) {
         else if (ch == KEY_DOWN || ch == 's' || ch == 'S' || ch == 'j' || ch == 'J') {
             update_grid(data, DOWN);
         }
-        else if (ch == '2' || ch == 'r' || ch == 'R') {
-            data->state = ST_RESTART;
-            return;
+
+        // Checking with temporary grid
+        bool didbreak = false;
+        for (size_t i = 0; i < 5; i++) {
+            for (size_t j = 0; j < 5; j++) {
+                if (tmp[i][j] != data->grid[i][j]) {
+                    add_rnd(data);
+                    didbreak = true;
+                    break;
+                }
+            }
+            if (didbreak) {
+                break;
+            }
         }
-        update_empty_fields(data);
     }
 }

@@ -10,6 +10,7 @@
 #include "../inc/colors.h"
 
 #define INIT_GRID_SIZE 4
+#define INIT_LOOSING_COND true
 
 static uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
@@ -52,6 +53,21 @@ void init_data(Data *data, uint8_t grid_size) {
         }
     }
     init_set(&data->empty_fields, grid_size*grid_size);
+
+
+    if (INIT_LOOSING_COND) {
+        size_t count = 0;
+        unsigned int nb = 2;
+        for (size_t i = 0; i < (grid_size * grid_size); i++) {
+            add_nb_to_grid(data, count, nb);
+            nb *= 2;
+            count++;
+        }
+        update_empty_fields(data);
+        return;
+    }
+
+    add_rnd(data);
     add_rnd(data);
 }
 
@@ -88,6 +104,9 @@ void init(Data *data) {
     init_color_hex(CL11, COL11);
     init_color_hex(CL12, COL12);
     init_color_hex(CL13, COL13);
+    init_color_hex(CL14, COL14);
+    init_color_hex(CL15, COL15);
+    init_color_hex(CL16, COL16);
     init_color_hex(BACKGROUND, COL_BACK);
 
     init_pair(P1, COLOR_BLACK, CL1);
@@ -103,6 +122,9 @@ void init(Data *data) {
     init_pair(P11, COLOR_BLACK, CL11);
     init_pair(P12, COLOR_BLACK, CL12);
     init_pair(P13, COLOR_BLACK, CL13);
+    init_pair(P14, COLOR_BLACK, CL14);
+    init_pair(P15, COLOR_BLACK, CL15);
+    init_pair(P16, COLOR_BLACK, CL16);
     init_pair(PBACK, BACKGROUND, BACKGROUND);
 }
 

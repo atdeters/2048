@@ -15,6 +15,9 @@
 #define COL11 0xFFA6C9  // Figma: Carnation Pink
 #define COL12 0xE40078  // Figma: Red Purple
 #define COL13 0xE4D00A  // Figma: Citrine Color
+#define COL14 0xE4D96F  // Figma: Straw
+#define COL15 0xFA5053  // Figma: Strawberry
+#define COL16 0x873260  // Figma: Boysenberry
 #define COL_BACK 0x000000
 
 // These are set to a ceratin rgb value
@@ -32,6 +35,9 @@ enum e_colors {
     CL11,
     CL12,
     CL13,
+    CL14,
+    CL15,
+    CL16,
     BACKGROUND
 };
 
@@ -50,6 +56,9 @@ enum e_pairs {
     P11,
     P12,
     P13,
+    P14,
+    P15,
+    P16,
     PBACK
 };
 
