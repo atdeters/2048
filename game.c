@@ -6,6 +6,7 @@
 #include "game.h"
 #include "state_play.h"
 #include "state_menu.h"
+#include "locale.h"
 
 enum e_nums {
 	N0 = (0b0),
@@ -35,14 +36,6 @@ uint8_t	get_rand_pos(Data *data) {
 
 uint8_t	read_nb(uint8_t x, uint8_t y, uint8_t *grid, uint8_t grid_size) {
 	uint8_t	nb = 0;
-}
-
-void	store_nb(uint8_t x, uint8_t y, uint8_t *grid, uint8_t grid_size, enum e_nums nb) {
-	if (grid_size == 4)
-	{
-		
-	}
-	uint8_t	byte_index = y *
 }
 
 void	init(Data *data) {
