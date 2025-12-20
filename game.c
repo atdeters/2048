@@ -8,22 +8,6 @@
 #include "state_menu.h"
 #include "locale.h"
 
-enum e_nums {
-	N0 = (0b0),
-	N2 = (0b1),
-	N4 = (0b1 + 1),
-	N8 = (0b1 + 2),
-	N16 = (0b1 + 3),
-	N32 = (0b1 + 4),
-	N64 = (0b1 + 5),
-	N128 = (0b1 + 6),
-	N256 = (0b1 + 7),
-	N512 = (0b1 + 8),
-	N1024 = (0b1 + 9),
-	N2048 = (0b1 + 10),
-	N4096 = (0b1 + 11)
-};
-
 uint8_t	get_rand_nb(void) {
 	return (rand() % 100 <= CHANCE_4 ? 4 : 2);
 }
@@ -31,19 +15,15 @@ uint8_t	get_rand_nb(void) {
 uint8_t	get_rand_pos(Data *data) {
 	return (rand() % (data->grid_size * data->grid_size));
 }
-//			0			1			2			4			5			6			7			8			9			10			...
-// grid => [0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000   0000 0000]
 
-uint8_t	read_nb(uint8_t x, uint8_t y, uint8_t *grid, uint8_t grid_size) {
-	uint8_t	nb = 0;
+long long	read_nb(uint8_t x, uint8_t y, long long **grid) {
+	return (grid[y][x]);
 }
 
-<<<<<<< HEAD
-void	init(Data *data) {
-	// Initialize game data
-	data->grid_size = 4;
-	data->state = ST_MENU;
-=======
+void	store_nb(uint8_t x, uint8_t y, long long **grid, long long nb) {
+	grid[y][x] = nb;
+}
+
 void init(Data *data) {
 
 	if (!is_power_of_2(WIN_VALUE))
@@ -51,7 +31,6 @@ void init(Data *data) {
     // Initialize game data
     data->grid_size = 4;
     data->state = ST_MENU;
->>>>>>> main
 
 	// Initialize ncurses
 	srand(time(NULL));
@@ -65,16 +44,9 @@ void init(Data *data) {
 	}
 }
 
-<<<<<<< HEAD
 void	quit(void) {
 	endwin();
 	exit(0);
-=======
-void quit(void) {
-    endwin();
-
-    exit(0);
->>>>>>> main
 }
 
 void	run(Data *data) {

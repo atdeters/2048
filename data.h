@@ -12,7 +12,7 @@ enum e_states {
 
 typedef struct s_data {
     uint8_t grid_size;
-    uint8_t grid[13];
+    long long grid[5][5];
     enum e_states state;
     bool has_colors;
     uint16_t max_y;
