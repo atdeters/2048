@@ -13,7 +13,7 @@ void menu(Data *data) {
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
         }
-        if (ch == '1' || ch == 'p' || ch == 'r') {
+        if (ch == '1' || ch == 'p' || ch == 'P') {
             data->state = ST_PLAY;
             return;
         }

@@ -42,6 +42,18 @@ void update_empty_fields(Data *data) {
     }
 }
 
+void init_data(Data *data, uint8_t grid_size) {
+    data->grid_size = grid_size;
+    data->state = ST_MENU;
+    for (size_t i = 0; i < grid_size; i++) {
+        for (size_t j = 0; j < grid_size; j++) {
+            data->grid[i][j] = 0;
+        }
+    }
+    init_set(&data->empty_fields, grid_size*grid_size);
+    add_rnd(data);
+}
+
 void init(Data *data) {
 
 	if (!is_power_of_2(WIN_VALUE))
@@ -91,10 +103,6 @@ void init(Data *data) {
     init_pair(P12, COLOR_BLACK, CL12);
     init_pair(P13, COLOR_BLACK, CL13);
     init_pair(PBACK, BACKGROUND, BACKGROUND);
-
-    // Add first, second gets added in game loop
-    init_set(&data->empty_fields, INIT_GRID_SIZE * INIT_GRID_SIZE);
-    add_rnd(data);
 }
 
 void quit(void) {
@@ -103,6 +111,7 @@ void quit(void) {
 }
 
 void run(Data *data) {
+    init_data(data, INIT_GRID_SIZE);
     while(true) {
         switch (data->state) {
             case ST_MENU:
@@ -110,6 +119,10 @@ void run(Data *data) {
                 break;
             case ST_PLAY:
                 play(data);
+                break;
+            case ST_RESTART:
+                init_data(data, data->grid_size);
+                data->state = ST_PLAY;
                 break;
             case ST_EXIT:
                 quit();

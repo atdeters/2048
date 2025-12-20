@@ -49,6 +49,10 @@ void play(Data *data) {
         else if (ch == KEY_DOWN || ch == 's' || ch == 'S' || ch == 'j' || ch == 'J') {
             update_grid(data, DOWN);
         }
+        else if (ch == 'r' || ch == 'R') {
+            data->state = ST_RESTART;
+            return;
+        }
         update_empty_fields(data);
     }
 }
