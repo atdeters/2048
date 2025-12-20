@@ -17,4 +17,7 @@ enum e_const {
 void init(Data *data);
 void run(Data *data);
 
+#include "helpers.h"
+
+
 #endif // ! GAME_H

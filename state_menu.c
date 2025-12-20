@@ -8,6 +8,10 @@ void menu(Data *data) {
         printw("In menu\n");
         refresh();
         int ch = getch();
+		if (ch == '\x1B') {
+            data->state = ST_EXIT;
+            return;
+        }
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->max_y, data->max_x);
             clear();
@@ -18,5 +22,6 @@ void menu(Data *data) {
             data->state = ST_PLAY;
             return;
         }
+
     }
 }

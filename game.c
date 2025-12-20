@@ -38,10 +38,20 @@ uint8_t	read_nb(uint8_t x, uint8_t y, uint8_t *grid, uint8_t grid_size) {
 	uint8_t	nb = 0;
 }
 
+<<<<<<< HEAD
 void	init(Data *data) {
 	// Initialize game data
 	data->grid_size = 4;
 	data->state = ST_MENU;
+=======
+void init(Data *data) {
+
+	if (!is_power_of_2(WIN_VALUE))
+		exit(1);
+    // Initialize game data
+    data->grid_size = 4;
+    data->state = ST_MENU;
+>>>>>>> main
 
 	// Initialize ncurses
 	srand(time(NULL));
@@ -55,9 +65,16 @@ void	init(Data *data) {
 	}
 }
 
+<<<<<<< HEAD
 void	quit(void) {
 	endwin();
 	exit(0);
+=======
+void quit(void) {
+    endwin();
+
+    exit(0);
+>>>>>>> main
 }
 
 void	run(Data *data) {
