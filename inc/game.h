@@ -4,6 +4,10 @@
 # include <stdint.h>
 # include "data.h"
 
+# ifndef DEBUG
+#  define DEBUG true
+# endif
+
 # ifndef CHANCE_4
 #   define CHANCE_4 5 // Chance in % to get a 4 instead of 2
 # endif // CHANCE_4

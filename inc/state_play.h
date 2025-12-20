@@ -1,7 +1,7 @@
 #ifndef STATES_PLAY_H
 # define STATES_PLAY_H
 
-# include "game.h"
+# include "data.h"
 
 void play(Data *data);
 
