@@ -84,6 +84,7 @@ void render_grid(Data *data)
 void play(Data *data) {
 
     getmaxyx(stdscr, data->max_y, data->max_x);
+    // put 2 random nums in grid
     render_grid(data);
 
     while(true) {
@@ -93,6 +94,7 @@ void play(Data *data) {
             render_grid(data);
             refresh();
         }
+        // if (MO)
         if (DEBUG && ch == '0') {
             data->state = ST_MENU;
             return;
