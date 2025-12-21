@@ -84,7 +84,7 @@ short	get_color(unsigned int nb)
 	return P65536;
 }
 
-void	color_cell(Data *data, Cell *cell, int x, int y, int max_digits)
+int	color_cell(Data *data, Cell *cell, int x, int y, int max_digits)
 {
 	unsigned int grid_num = data->grid[y][x];
 	int start_x = 1 + x * (cell->w + 1);
@@ -106,7 +106,10 @@ void	color_cell(Data *data, Cell *cell, int x, int y, int max_digits)
 		attron(COLOR_PAIR(color));
 		//render ascii_digits if big enough
 		if (cell->h >= 5 && cell->w >= max_digits * 3 + max_digits + 1) //ascii digit is size 3 + spaces between digits and spaces between start and end!
-			print_ascii_digits(grid_num, x_center, y_center);
+		{
+			if (print_ascii_digits(grid_num, x_center, y_center))
+				return (1);
+		}
 		else	/// if small grid render normal ascii chars
 		{
 			int textstart   = x_center - (digits / 2);
@@ -115,14 +118,14 @@ void	color_cell(Data *data, Cell *cell, int x, int y, int max_digits)
 		}
 		attroff(COLOR_PAIR(color));
 	}
+	return (0);
 }
 
-void	color_grid(Data *data, Cell *cell)
+int	color_grid(Data *data, Cell *cell)
 {
 
 	int		x = 0;
 	int y = 0;
-
 	int max_digits = getmax_digit(data);
 
 	while (y < data->grid_size) // loops through each cell per col
@@ -130,13 +133,14 @@ void	color_grid(Data *data, Cell *cell)
 		x = 0;
 		while (x < data->grid_size) // loops through each cell per row
 		{
-			color_cell(data, cell, x, y, max_digits);
+			if (color_cell(data, cell, x, y, max_digits))
+				return (1);
 			x++;
 		}
 		y++;
 	}
+	return (0);
 }
-
 
 static void compute_cell_size(Data *data, Cell *cell)
 {
@@ -159,7 +163,7 @@ static void compute_cell_size(Data *data, Cell *cell)
 }
 
 
-void render_grid(Data *data, Cell *cell)
+int render_grid(Data *data, Cell *cell)
 {
     attron(COLOR_PAIR(PGRID));
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
@@ -207,7 +211,9 @@ void render_grid(Data *data, Cell *cell)
     }
     mvaddch(y, x, '+');
 	attroff(COLOR_PAIR(PGRID));
-	color_grid(data, &data->cell);				// fills cells with different colors
+	if (color_grid(data, &data->cell))
+		return (1);		// fills cells with different colors
     refresh();
+	return (0);
 }
 

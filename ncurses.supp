@@ -1,0 +1,72 @@
+{
+   ncurses_tiparm_strdup
+   Memcheck:Leak
+   fun:malloc
+   fun:strdup
+   ...
+   fun:_nc_tiparm
+   ...
+   fun:newterm_sp
+   fun:newterm
+   fun:initscr
+}
+
+{
+   ncurses_tiparm_tsearch_initscr
+   Memcheck:Leak
+   fun:malloc
+   fun:tsearch
+   ...
+   fun:_nc_tiparm
+   ...
+   fun:newterm_sp
+   fun:newterm
+   fun:initscr
+}
+
+{
+   ncurses_tiparm_tsearch_wrefresh
+   Memcheck:Leak
+   fun:malloc
+   fun:tsearch
+   ...
+   fun:_nc_tiparm
+   ...
+   fun:doupdate_sp
+   fun:wrefresh
+}
+
+{
+   ncurses_tiparm_strdup_wrefresh
+   Memcheck:Leak
+   fun:malloc
+   fun:strdup
+   ...
+   fun:_nc_tiparm
+   ...
+   fun:doupdate_sp
+   fun:wrefresh
+}
+
+{
+   ncurses_tiparm_calloc
+   Memcheck:Leak
+   fun:calloc
+   ...
+   fun:_nc_tiparm
+   ...
+   fun:newterm_sp
+   fun:newterm
+   fun:initscr
+}
+
+{
+   ncurses_tiparm_calloc_wrefresh
+   Memcheck:Leak
+   fun:calloc
+   ...
+   fun:_nc_tiparm
+   ...
+   fun:doupdate_sp
+   fun:wrefresh
+}

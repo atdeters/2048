@@ -164,7 +164,8 @@ int run(Data *data) {
                 menu(data);
                 break;
             case ST_PLAY:
-                play(data);
+                if (play(data))
+					return (1);
                 break;
             case ST_RESTART:
                 init_data(data, data->grid_size);

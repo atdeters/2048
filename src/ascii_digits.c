@@ -99,10 +99,9 @@ static void	safe_cleanup(char *num, char **ascii_arr, char *line)
 		free_split(ascii_arr);
 	if (num)
 		free(num);
-	exit(1);
 }
 
-void	print_ascii_digits(unsigned int nb, int x_center, int y_center)
+int	print_ascii_digits(unsigned int nb, int x_center, int y_center)
 {
 	char		*num;
 	int			i;
@@ -125,8 +124,10 @@ void	print_ascii_digits(unsigned int nb, int x_center, int y_center)
 
 	ascii_arr = ft_calloc(4, sizeof(char *));
 	if (!ascii_arr)
+	{
 		safe_cleanup(num, NULL, NULL);
-
+		return (1);
+	}
 	i = 0;
 	while (i < 3)   ///each ascii art row
 	{
@@ -136,20 +137,26 @@ void	print_ascii_digits(unsigned int nb, int x_center, int y_center)
 		{
 			int d = num[j] - '0';
 			if (d < 0 || d > 9)
+			{
 				safe_cleanup(num, ascii_arr, line);
-
+				return (1);
+			}
 			glyph = get_ascii_digit(d);
 			if (!glyph || !glyph[i])
+			{
 				safe_cleanup(num, ascii_arr, line);
-
-
+				return (1);
+			}
 
 			//////////////// append glyph row
 			if (!line)
 			{
 				line = ft_strdup(glyph[i]);
 				if (!line)
+				{
 					safe_cleanup(num, ascii_arr, NULL);
+					return (1);
+				}
 			}
 			else
 			{
@@ -157,7 +164,10 @@ void	print_ascii_digits(unsigned int nb, int x_center, int y_center)
 				free(line);
 				line = new_line;
 				if (!line)
+				{
 					safe_cleanup(num, ascii_arr, NULL);
+					return (1);
+				}
 			}
 
 			////append space between digits (not after last digit)
@@ -167,7 +177,10 @@ void	print_ascii_digits(unsigned int nb, int x_center, int y_center)
 				free(line);
 				line = new_line;
 				if (!line)
+				{
 					safe_cleanup(num, ascii_arr, NULL);
+					return (1);
+				}
 			}
 			j++;
 		}
@@ -186,7 +199,7 @@ void	print_ascii_digits(unsigned int nb, int x_center, int y_center)
 		printw("%s", ascii_arr[i]);
 		i++;
 	}
-
 	free_split(ascii_arr);
 	free(num);
+	return (0);
 }

@@ -10,4 +10,5 @@ int main(void) {
     if (run(&data)) {
         return 1;
     }
+	return(0);
 }

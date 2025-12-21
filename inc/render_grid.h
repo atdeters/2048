@@ -5,7 +5,7 @@
 #include "stdio.h"
 #include "data.h"
 
-void	color_grid(Data *data, Cell *cell);
-void	render_grid(Data *data, Cell *cell);
+int	color_grid(Data *data, Cell *cell);
+int	render_grid(Data *data, Cell *cell);
 
 #endif // ! RENDER_GRID_C
