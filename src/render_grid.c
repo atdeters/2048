@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "../inc/render_grid.h"
 #include <ncursesw/curses.h>
-#include "colors.h"
+#include "../inc/colors.h"
 #include "../inc/ascii_digits.h"
 
 int	ft_count_digits(int n)
@@ -101,7 +101,7 @@ void	color_cell(Data *data, Cell *cell, int x, int y, int max_digits)
 	int x_center = start_x + (cell->w / 2);
 	int y_center = start_y + (cell->h / 2);
 
-	if (x_center < data->grid_max_x && y_center < data->grid_max_y)
+	if (grid_num != 0 && x_center < data->grid_max_x && y_center < data->grid_max_y)
 	{
 		attron(COLOR_PAIR(color));
 		//render ascii_digits if big enough
@@ -111,7 +111,7 @@ void	color_cell(Data *data, Cell *cell, int x, int y, int max_digits)
 		{
 			int textstart   = x_center - (digits / 2);
 			move(y_center, textstart);
-			printw("%u", grid_num);
+                printw("%u", grid_num);
 		}
 		attroff(COLOR_PAIR(color));
 	}
