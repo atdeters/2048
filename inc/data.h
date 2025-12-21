@@ -21,6 +21,12 @@ enum e_menu {
     FLD_QUIT
 };
 
+enum e_sett {
+    FLD_4,
+    FLD_5,
+    FLD_BACK
+};
+
 typedef struct s_cell {
 
     int	w;
@@ -38,7 +44,9 @@ typedef struct s_data {
     uint16_t        max_x;
     Set             empty_fields;
     enum e_menu     menu_state;
+    enum e_sett     settings_state;
     bool            game_on;
+    bool            won;
 } Data;
 
 #endif // ! DATA_H

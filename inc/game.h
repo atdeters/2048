@@ -23,13 +23,12 @@ enum e_dir {
     RIGHT
 };
 
-enum e_const {
-    WIN_VALUE = 2048
-};
+
 
 void add_rnd(Data *data);
 void update_empty_fields(Data *data);
 void init(Data *data);
+void init_data(Data *data, uint8_t grid_size);
 void quit(void);
 void run(Data *data);
 

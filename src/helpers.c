@@ -1,5 +1,6 @@
 #include "../inc/helpers.h"
 #include "../inc/data.h"
+#include "../inc/config.h"
 #include <ncurses.h>
 #include <stdint.h>
 
@@ -91,9 +92,23 @@ void display_grid(Data *data) {
     refresh();
 }
 
+bool is_won(Data *data) {
+    for (int i = 0; i < data->grid_size; i++) {
+        for (int j = 0; j < data->grid_size; j++) {
+            if (END_AT_2048 && data->grid[i][j] >= WIN_VALUE) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 bool is_lost(Data *data) {
     for (int i = 0; i < data->grid_size; i++) {
         for (int j = 0; j < data->grid_size; j++) {
+            if (END_AT_2048 && data->grid[i][j] >= 2048) {
+                return true;
+            }
             if (data->empty_fields.idx != -1) {
                 return false;
             }

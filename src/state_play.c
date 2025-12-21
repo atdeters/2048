@@ -13,12 +13,27 @@ void play(Data *data) {
     data->menu_state = FLD_PLAY;
     while(true) {
         render_grid(data, &data->cell);
-        if (is_lost(data)) {
-            data->game_on = false;
+
+
+        if (!data->won && is_won(data)) {
+            // TODO: Add a pop up
+            move(1,1);
+            printw("You won the game!\n");
+            getch();
+            data->won = true;
+        }
+        else if (is_lost(data)) {
             move(1,1);
             printw("You lost the game!\n");
-            // TODO: Actually something happens now
+
+            // TODO: Make this a pop up
+            getch();
+            init_data(data, data->grid_size);
+            data->state = ST_MENU;
+            data->game_on = false;
+            return;
         }
+
         // Get user input
         int ch = getch();
 

@@ -46,6 +46,8 @@ void update_empty_fields(Data *data) {
 
 void init_data(Data *data, uint8_t grid_size) {
     data->grid_size = grid_size;
+    data->won = false;
+    data->game_on = false;
     data->state = ST_MENU;
     for (size_t i = 0; i < grid_size; i++) {
         for (size_t j = 0; j < grid_size; j++) {
@@ -84,7 +86,9 @@ void init(Data *data) {
     data->grid_size = INIT_GRID_SIZE;
     data->state = ST_MENU;
     data->menu_state = FLD_PLAY;
+    data->settings_state = FLD_4;
     data->game_on = false;
+    data->won = false;
 
     // Initialize ncurses
     srand(time(NULL));
