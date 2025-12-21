@@ -25,8 +25,6 @@ static void print_border(unsigned int len) {
 }
 
 static void print_botton(char *name, char *buttons, bool highlight) {
-
-
     attron(COLOR_PAIR(PGRID));
     addstr("||");
     attroff(COLOR_PAIR(PGRID));
@@ -61,12 +59,7 @@ void render_menu_off(Data *data) {
     move(y, x);
     print_border(MENU_WIDTH);
     move(y+1, x);
-    if (data->game_on == false) {
-        print_botton("Play", "p", data->menu_state == FLD_PLAY ? 1 : 0);
-    }
-    else {
-        print_botton("Resume", "p", data->menu_state == FLD_PLAY ? 1 : 0);
-    }
+    print_botton("Play", "p", data->menu_state == FLD_PLAY ? 1 : 0);
     move(y+2, x);
     print_botton("Settings", "e", data->menu_state == FLD_SETT ? 1 : 0);
     move(y+3, x);
@@ -96,6 +89,23 @@ void render_menu_on(Data *data) {
     refresh();
 }
 
+void print_label(const char *label) {
+    attron(COLOR_PAIR(PGRID));
+    addstr("||");
+    attroff(COLOR_PAIR(PGRID));
+
+    attron(A_UNDERLINE);
+    addstr(label);
+    attroff(A_UNDERLINE);
+
+    for (int i = 0; i < MENU_WIDTH - 2 - ft_strlen(label); i++) {
+        addch(' ');
+    }
+    attron(COLOR_PAIR(PGRID));
+    addstr("||");
+    attroff(COLOR_PAIR(PGRID));
+}
+
 void render_settings(Data *data) {
     clear();
     int x = (data->grid_max_x / 2) - (MENU_WIDTH / 2);
@@ -104,22 +114,24 @@ void render_settings(Data *data) {
     move(y, x);
     print_border(MENU_WIDTH);
     move(y+1, x);
+    print_label("Grid size");
+    move(y+2,x);
     if (data->grid_size == 4) {
         print_botton("[x] 4x4", "4", data->settings_state == FLD_4 ? 1 : 0);
     }
     else {
         print_botton("[ ] 4x4", "4", data->settings_state == FLD_4 ? 1 : 0);
     }
-    move(y+2, x);
+    move(y+3, x);
     if (data->grid_size == 5) {
         print_botton("[x] 5x5", "5", data->settings_state == FLD_5 ? 1 : 0);
     }
     else {
         print_botton("[ ] 5x5", "5", data->settings_state == FLD_5 ? 1 : 0);
     }
-    move(y+3, x);
-    print_botton("Go Back", "b", data->settings_state == FLD_BACK ? 1 : 0);
     move(y+4, x);
+    print_botton("Go Back", "b", data->settings_state == FLD_BACK ? 1 : 0);
+    move(y+5, x);
     print_border(MENU_WIDTH);
     refresh();
 }

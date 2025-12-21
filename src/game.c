@@ -161,6 +161,7 @@ void run(Data *data) {
             case ST_RESTART:
                 init_data(data, data->grid_size);
                 data->state = ST_PLAY;
+                data->game_on = true;
                 break;
             case ST_EXIT:
                 quit();
