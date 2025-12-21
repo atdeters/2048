@@ -35,7 +35,6 @@ void    set_new_highscore(Data *data, size_t moves) {
 int popup(Data *data, enum e_end end) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     while(true) {
-
         if (end == WON) {
             render_popup_won(data);
         }
@@ -46,7 +45,7 @@ int popup(Data *data, enum e_end end) {
         int ch = getch();
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
-            continue;
+            return 2;
         }
         else if (ch == 'p' || ch == 'P') { // Means resume in this case
             data->state = ST_PLAY;
@@ -90,8 +89,6 @@ int popup(Data *data, enum e_end end) {
             else if (end == WON && data->popup_state != FLD_PLAY) {
                 data->popup_state -= 1;
             }
-
-
         }
         else if (ch == KEY_DOWN || ch == 's' || ch == 'S' || ch == 'j' || ch == 'J') {
             if (data->popup_state != FLD_QUIT) {
@@ -104,12 +101,26 @@ int popup(Data *data, enum e_end end) {
 }
 
 int play(Data *data) {
+    int res;
     size_t  moves = 0;
 
     data->score = 0;
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     data->menu_state = FLD_PLAY;
     while(true) {
+        res = 0;
+        /*
+        getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
+        if (data->grid_max_x < 10 || data->grid_max_y < 17) {
+            clear();
+            printw("Window too small!\n");
+            getch();
+            continue;
+        }
+        */
+
+
+
         if (render_grid(data, &data->cell)) {
             return 1;
         }
@@ -125,26 +136,46 @@ int play(Data *data) {
             data->won = true;
             if (WIN_VALUE != 2048 && is_lost(data)) { // In this case just checks if 2048 got reached
                 data->popup_state = FLD_RESTART;
-                if (popup(data, END)) {
+                res = popup(data, END);
+                if (res == 2) {
+                    continue;
+                }
+                else if (res) {
                     return 0;
                 }
             }
-            else if (popup(data, WON)) {
-                data->popup_state = FLD_PLAY;
-                return 0;
+            else {
+                res = popup(data, WON);
+                if (res == 2) {
+                    continue;
+                }
+                else if (res) {
+                    data->popup_state = FLD_PLAY;
+                    return 0;
+                }
             }
+
+
             data->cont = true;
             continue;
         }
         else if (is_lost(data)) {
             data->popup_state = FLD_RESTART;
             if (data->won) {
-                if (popup(data, WON_OVER)) {
+                res = popup(data, WON_OVER);
+                if (res == 2) {
+                    continue;
+                }
+                else if (res) {
                     return 0;
                 }
             }
             else {
-                if (popup(data, LOSE)) {
+                res = popup(data, LOSE);
+                if (res == 2) {
+                    continue;
+                }
+                else if (res) {
                     return 0;
                 }
             }

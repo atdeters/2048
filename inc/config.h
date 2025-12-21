@@ -4,7 +4,7 @@
 # include "../themes/theme-original.h"
 
 # define INIT_GRID_SIZE 4
-# define INIT_LOOSING_COND false
+# define INIT_LOOSING_COND true
 # define LOSE_INSTANT false
 
 # define END_AT_2048 true
