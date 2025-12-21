@@ -7,11 +7,6 @@ Down: Arrow Down, J, S
 Left: Arrow Left, A, H  
 Right: Arrow Right, D, L  
 
-Other Keys:  
-Open Menu: M, 0  
-Play/Resume: P, 1  
-Restart: R, 2  
-
 
 
  _
