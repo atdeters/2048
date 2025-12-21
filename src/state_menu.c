@@ -33,7 +33,6 @@ void menu(Data *data) {
             data->game_on = true;
             return;
         }
-        // TODO:
         else if (data->game_on && (ch == 'r' || ch == 'R')) {
             data->state = ST_RESTART;
             return;
@@ -70,7 +69,6 @@ void menu(Data *data) {
                     return;
             }
         }
-
 
         // Going up and down in the menu
         else if (ch == KEY_UP || ch == 'w' || ch == 'W' || ch == 'k' || ch == 'K') {

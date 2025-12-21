@@ -93,7 +93,7 @@ void display_grid(Data *data) {
 bool is_won(Data *data) {
     for (int i = 0; i < data->grid_size; i++) {
         for (int j = 0; j < data->grid_size; j++) {
-            if (END_AT_2048 && data->grid[i][j] >= WIN_VALUE) {
+            if (data->grid[i][j] >= WIN_VALUE) {
                 return true;
             }
         }
@@ -107,9 +107,6 @@ bool is_lost(Data *data) {
             if (END_AT_2048 && data->grid[i][j] >= 2048) {
                 return true;
             }
-            if (data->empty_fields.idx != -1) {
-                return false;
-            }
             if (j < data->grid_size - 1 && data->grid[i][j] == data->grid[i][j+1]) {
                 return false;
             }
@@ -117,6 +114,9 @@ bool is_lost(Data *data) {
                 return false;
             }
         }
+    }
+    if (data->empty_fields.idx != -1) {
+        return false;
     }
     return true;
 }

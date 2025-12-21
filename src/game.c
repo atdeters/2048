@@ -49,7 +49,11 @@ void init_data(Data *data, uint8_t grid_size) {
     data->grid_size = grid_size;
     data->won = false;
     data->game_on = false;
+    data->cont = false;
     data->state = ST_MENU;
+    data->menu_state = FLD_PLAY;
+    data->settings_state = FLD_4;
+    data->popup_state = FLD_PLAY;
     for (size_t i = 0; i < grid_size; i++) {
         for (size_t j = 0; j < grid_size; j++) {
             data->grid[i][j] = 0;
@@ -101,8 +105,10 @@ int init(Data *data) {
     data->state = ST_MENU;
     data->menu_state = FLD_PLAY;
     data->settings_state = FLD_4;
+    data->popup_state = FLD_PLAY;
     data->game_on = false;
     data->won = false;
+    data->cont = false;
 
     // Initialize ncurses
     srand(time(NULL));

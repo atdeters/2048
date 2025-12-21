@@ -45,8 +45,10 @@ typedef struct s_data {
     Set             empty_fields;
     enum e_menu     menu_state;
     enum e_sett     settings_state;
+    enum e_menu     popup_state;
     bool            game_on;
     bool            won;
+    bool            cont;
 } Data;
 
 #endif // ! DATA_H

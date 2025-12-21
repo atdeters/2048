@@ -85,6 +85,9 @@ void settings(Data *data) {
                     }
                     break;
                 case FLD_BACK:
+                    if (data->grid_size != grid_size_before) {
+                        init_data(data, data->grid_size);
+                    }
                     return;
             }
         }
