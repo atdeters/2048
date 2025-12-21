@@ -84,6 +84,7 @@ void init(Data *data) {
     data->grid_size = INIT_GRID_SIZE;
     data->state = ST_MENU;
     data->menu_state = FLD_PLAY;
+    data->game_on = false;
 
     // Initialize ncurses
     srand(time(NULL));

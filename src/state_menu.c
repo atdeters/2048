@@ -62,9 +62,14 @@ void render_menu_main(Data *data) {
     move(y, x);
     print_border(MENU_WIDTH);
     move(y+1, x);
-    print_botton("Play", "p", data->menu_state == FLD_PLAY ? 1 : 0);
+    if (data->game_on == false) {
+        print_botton("Play", "p", data->menu_state == FLD_PLAY ? 1 : 0);
+    }
+    else {
+        print_botton("Resume", "p", data->menu_state == FLD_PLAY ? 1 : 0);
+    }
     move(y+2, x);
-    print_botton("Settings", "s", data->menu_state == FLD_SETT ? 1 : 0);
+    print_botton("Settings", "e", data->menu_state == FLD_SETT ? 1 : 0);
     move(y+3, x);
     print_botton("Quit", "q", data->menu_state == FLD_QUIT ? 1 : 0);
     move(y+4, x);
@@ -88,18 +93,28 @@ void menu(Data *data) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
             continue;
         }
-        else if (ch == '1' || ch == 'p' || ch == 'P') {
+        else if (ch == 'p' || ch == 'P') {
+            data->state = ST_PLAY;
+            data->game_on = true;
+            return;
+        }
+        else if (ch == 'r' || ch == 'R') {
             data->state = ST_PLAY;
             return;
         }
-        else if (ch == '2' || ch == 'r' || ch == 'R') {
+        else if (ch == 'q' || ch == 'Q') {
+            data->state = ST_EXIT;
+            return;
+        }
+        else if (ch == 'e' || ch == 'E') {
             data->state = ST_PLAY;
             return;
         }
-        if (ch == KEY_ENTER) {
+        else if (ch == KEY_ENTER) {
             switch (data->menu_state) {
                 case FLD_PLAY:
                     data->state = ST_PLAY;
+                    data->game_on = true;
                     return;
                 case FLD_QUIT:
                     data->state = ST_EXIT;

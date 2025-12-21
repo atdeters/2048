@@ -5,7 +5,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include "set.h"
-# include "libft.h"
+# include "../inc/libft.h"
 
 enum e_states {
     ST_MENU,
@@ -37,6 +37,7 @@ typedef struct s_data {
     uint16_t        max_x;
     Set             empty_fields;
     enum e_menu     menu_state;
+    bool            game_on;
 } Data;
 
 #endif // ! DATA_H

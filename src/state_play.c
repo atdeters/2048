@@ -26,7 +26,7 @@ void play(Data *data) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
             continue;
         }
-        if (ch == '0' || ch == 'M' || ch == 'm') {
+        if (ch == 'M' || ch == 'm') {
             data->state = ST_MENU;
             return;
         }
@@ -34,7 +34,7 @@ void play(Data *data) {
             data->state = ST_EXIT;
             return;
         }
-        else if (ch == '2' || ch == 'r' || ch == 'R') {
+        else if (ch == 'r' || ch == 'R') {
             data->state = ST_RESTART;
             return;
         }
