@@ -160,7 +160,7 @@ void settings(Data *data) {
         else if (ch == '5') {
             data->grid_size = 5;
         }
-        else if (ch == 'b' || ch == 'B') {
+        else if (ch == 'b' || ch == 'B' || ch == 'm' || ch == 'M') {
             data->state = ST_MENU;
             return;
         }
