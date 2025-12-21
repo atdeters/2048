@@ -8,4 +8,4 @@
 void	color_grid(Data *data, Cell *cell);
 void	render_grid(Data *data, Cell *cell);
 
-#endif // ! HELPERS_C
+#endif // ! RENDER_GRID_C

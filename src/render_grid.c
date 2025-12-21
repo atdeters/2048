@@ -4,6 +4,25 @@
 #include <ncursesw/curses.h>
 #include "colors.h"
 
+int	ft_count_digits(unsigned int n)
+{
+	int			digits;
+	long int	num;
+
+	num = n;
+	digits = 0;
+	if (num == 0)
+		digits = 1;
+	if (num < 0)
+		num = -num;
+	while (num > 0)
+	{
+		num = num / 10;
+		digits++;
+	}
+	return (digits);
+}
+
 
 short	get_color(unsigned int nb)
 {
@@ -42,21 +61,25 @@ void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
 	int start_x = 1 + x * (cell->w + 1);
 	int start_y = 1 + y * (cell->h + 1);
 
-/*  	printw("\n\nstart: %i\tend:%i\n", start, end);*/
-
-
 	short color = get_color(grid_num);
 
-	move(start_y, start_x);
+
+
 	for (int row = 0; row < cell->h; row++){
 		move(start_y + row, start_x);
 		chgat(cell->w, A_NORMAL, color, NULL);
 	}
 
+	int x_center = start_x + (cell->w / 2);
+	int y_center = start_y + (cell->h / 2);
+
+	int textstart   = x_center - (ft_count_digits(grid_num) / 2);
+ 	attron(COLOR_PAIR(color));
+	move(y_center, textstart);
+	printw("%u", grid_num);
+	attroff(COLOR_PAIR(color));
 
 }
-
-
 
 void	color_grid(Data *data, Cell *cell)
 {
@@ -74,8 +97,7 @@ void	color_grid(Data *data, Cell *cell)
 		}
 		y++;
 	}
-	// Loop through col 0 - grid_size - 1
-	// col 1 --> start from 1st row till cell
+
 	return ;
 }
 
