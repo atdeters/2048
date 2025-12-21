@@ -78,22 +78,22 @@ void init_data(Data *data, uint8_t grid_size) {
     add_rnd(data);
 }
 
-void init(Data *data) {
+int init(Data *data) {
 
 
     if (!is_power_of_2(WIN_VALUE)) {
 	    ft_fprintf(STDERR_FILENO, "Error\nWIN_VALUE is not a power of 2\n");
-        exit(1);
+        return 1;
     }
     else if (WIN_VALUE <= 4) {
 	    ft_fprintf(STDERR_FILENO, "Error\nWIN_VALUE to small: %d\n", WIN_VALUE);
         ft_fprintf(STDERR_FILENO, "[Game starts with 2/4]\n");
-        exit(1);
+        return 1;
     }
     else if (END_AT_2048 && WIN_VALUE > 2048) {
         ft_fprintf(STDERR_FILENO, "Error\nWin value can never be reached: %d\n", WIN_VALUE);
         ft_fprintf(STDERR_FILENO, "[Game ends after reaching 2048. Turn of END_AT_2048 macro]\n");
-        exit(1);
+        return 1;
     };
 
 
@@ -153,14 +153,10 @@ void init(Data *data) {
     init_pair(P16384, COLOR_BLACK, CL14);
     init_pair(P32768, COLOR_BLACK, CL15);
     init_pair(P65536, COLOR_BLACK, CL16);
+    return 0;
 }
 
-void quit(void) {
-    endwin();
-    exit(0);
-}
-
-void run(Data *data) {
+int run(Data *data) {
     init_data(data, INIT_GRID_SIZE);
     while(true) {
         switch (data->state) {
@@ -176,7 +172,9 @@ void run(Data *data) {
                 data->game_on = true;
                 break;
             case ST_EXIT:
-                quit();
+                endwin();
+                return 0;
         }
     }
+    return 0;
 }

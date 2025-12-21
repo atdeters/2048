@@ -23,14 +23,11 @@ enum e_dir {
     RIGHT
 };
 
-
-
 void add_rnd(Data *data);
 void update_empty_fields(Data *data);
-void init(Data *data);
+int init(Data *data);
 void init_data(Data *data, uint8_t grid_size);
-void quit(void);
-void run(Data *data);
+int run(Data *data);
 
 #include "helpers.h"
 #include "state_menu.h"

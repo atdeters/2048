@@ -8,12 +8,14 @@
 #include <ncursesw/curses.h>
 #include "stdlib.h"
 
-void play(Data *data) {
+int play(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     data->menu_state = FLD_PLAY;
     while(true) {
-        render_grid(data, &data->cell);
 
+        if (render_grid(data, &data->cell)) {
+            return 1;
+        }
 
         if (!data->won && is_won(data)) {
             // TODO: Add a pop up
@@ -31,7 +33,7 @@ void play(Data *data) {
             init_data(data, data->grid_size);
             data->state = ST_MENU;
             data->game_on = false;
-            return;
+            return 0;
         }
 
         // Get user input
@@ -44,11 +46,11 @@ void play(Data *data) {
         }
         if (ch == 'M' || ch == 'm') {
             data->state = ST_MENU;
-            return;
+            return 0;
         }
         else if (ch == KEY_ESCAPE) {
             data->state = ST_EXIT;
-            return;
+            return 0;
         }
 
         // Temporary grid

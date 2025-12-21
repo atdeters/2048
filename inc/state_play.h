@@ -3,6 +3,6 @@
 
 # include "../inc/data.h"
 
-void play(Data *data);
+int play(Data *data);
 
 #endif // ! STATES_PLAY_H

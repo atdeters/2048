@@ -4,6 +4,10 @@
 int main(void) {
     Data data = {0};
 
-    init(&data);
-    run(&data);
+    if (init(&data)) {
+        return 1;
+    }
+    if (run(&data)) {
+        return 1;
+    }
 }
