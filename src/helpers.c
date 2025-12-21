@@ -76,8 +76,8 @@ void display_grid(Data *data) {
 }
 
 bool is_lost(Data *data) {
-    for (size_t i = 0; i < data->grid_size; i++) {
-        for (size_t j = 0; j < data->grid_size; j++) {
+    for (int i = 0; i < data->grid_size; i++) {
+        for (int j = 0; j < data->grid_size; j++) {
             if (data->empty_fields.idx != -1) {
                 return false;
             }
