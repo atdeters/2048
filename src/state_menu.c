@@ -53,7 +53,7 @@ static void print_botton(char *name, char *buttons, bool highlight) {
     attroff(COLOR_PAIR(PGRID));
 }
 
-void render_menu_main(Data *data) {
+void render_menu_off(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     clear();
     int x = (data->grid_max_x / 2) - (MENU_WIDTH / 2);
@@ -77,14 +77,48 @@ void render_menu_main(Data *data) {
     refresh();
 }
 
+void render_menu_on(Data *data) {
+    getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
+    clear();
+    int x = (data->grid_max_x / 2) - (MENU_WIDTH / 2);
+    int y = (data->grid_max_y / 2) - (MENU_HEIGHT / 2);
+
+    move(y, x);
+    print_border(MENU_WIDTH);
+    move(y+1, x);
+    print_botton("Resume", "p", data->menu_state == FLD_PLAY ? 1 : 0);
+    move(y+2, x);
+    print_botton("Restart", "r", data->menu_state == FLD_RESTART ? 1 : 0);
+    move(y+3, x);
+    print_botton("Settings", "e", data->menu_state == FLD_SETT ? 1 : 0);
+    move(y+4, x);
+    print_botton("Quit", "q", data->menu_state == FLD_QUIT ? 1 : 0);
+    move(y+5, x);
+    print_border(MENU_WIDTH);
+    refresh();
+}
+
+
+// Menu: Game not on
+// Menu: Game on
+// Setting: 4x4 - 5x5
+
+
+
 void menu(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     while(true) {
 
-        render_menu_main(data);
+        if (data->game_on) {
+            render_menu_on(data);
+        }
+        else {
+            render_menu_off(data);
+        }
 
         int ch = getch();
 
+        // Special keys
 		if (ch == KEY_ESCAPE) {
             data->state = ST_EXIT;
             return;
@@ -93,13 +127,18 @@ void menu(Data *data) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
             continue;
         }
+
+
+
+
         else if (ch == 'p' || ch == 'P') {
             data->state = ST_PLAY;
             data->game_on = true;
             return;
         }
-        else if (ch == 'r' || ch == 'R') {
-            data->state = ST_PLAY;
+        // TODO:
+        else if (data->game_on && (ch == 'r' || ch == 'R')) {
+            data->state = ST_RESTART;
             return;
         }
         else if (ch == 'q' || ch == 'Q') {
@@ -110,6 +149,8 @@ void menu(Data *data) {
             data->state = ST_PLAY;
             return;
         }
+
+        // Enter key depending on the current state
         else if (ch == KEY_ENTER) {
             switch (data->menu_state) {
                 case FLD_PLAY:
@@ -122,15 +163,27 @@ void menu(Data *data) {
                 case FLD_SETT:
                     data->state = ST_PLAY;
                     return;
+                case FLD_RESTART:
+                    data->state = ST_RESTART;
+                    return;
             }
         }
+
+
+        // Going up and down in the menu
         else if (ch == KEY_UP || ch == 'w' || ch == 'W' || ch == 'k' || ch == 'K') {
+            if (data->game_on == false && data->menu_state == FLD_SETT) {
+                data->menu_state -= 2;
+            }
             if (data->menu_state != FLD_PLAY) {
                 data->menu_state -= 1;
             }
         }
         else if (ch == KEY_DOWN || ch == 's' || ch == 'S' || ch == 'j' || ch == 'J') {
-            if (data->menu_state != FLD_QUIT) {
+            if (data->game_on == false && data->menu_state == FLD_PLAY) {
+                data->menu_state += 2;
+            }
+            else if (data->menu_state != FLD_QUIT) {
                 data->menu_state += 1;
             }
         }

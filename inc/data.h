@@ -16,6 +16,7 @@ enum e_states {
 
 enum e_menu {
     FLD_PLAY,
+    FLD_RESTART,
     FLD_SETT,
     FLD_QUIT
 };

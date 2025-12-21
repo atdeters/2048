@@ -14,6 +14,7 @@ void play(Data *data) {
     while(true) {
         render_grid(data, &data->cell);
         if (is_lost(data)) {
+            data->game_on = false;
             move(1,1);
             printw("You lost the game!\n");
             // TODO: Actually something happens now
@@ -21,7 +22,7 @@ void play(Data *data) {
         // Get user input
         int ch = getch();
 
-        // Operational Keys
+        // Special Keys
         if (ch == KEY_RESIZE) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
             continue;
@@ -32,10 +33,6 @@ void play(Data *data) {
         }
         else if (ch == KEY_ESCAPE) {
             data->state = ST_EXIT;
-            return;
-        }
-        else if (ch == 'r' || ch == 'R') {
-            data->state = ST_RESTART;
             return;
         }
 
