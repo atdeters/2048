@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <time.h>
+#include <unistd.h>
 #include "locale.h"
 #include "../inc/data.h"
 #include "../inc/game.h"
@@ -82,17 +83,17 @@ void init(Data *data) {
 
 
     if (!is_power_of_2(WIN_VALUE)) {
-	    printf("Error\nWIN_VALUE is not a power of 2\n");
+	    ft_fprintf(STDERR_FILENO, "Error\nWIN_VALUE is not a power of 2\n");
         exit(1);
     }
     else if (WIN_VALUE <= 4) {
-	    printf("Error\nWIN_VALUE to small: %d\n", WIN_VALUE);
-        printf("[Game starts with 2/4]\n");
+	    ft_fprintf(STDERR_FILENO, "Error\nWIN_VALUE to small: %d\n", WIN_VALUE);
+        ft_fprintf(STDERR_FILENO, "[Game starts with 2/4]\n");
         exit(1);
     }
     else if (END_AT_2048 && WIN_VALUE > 2048) {
-        printf("Error\nWin value can never be reached: %d\n", WIN_VALUE);
-        printf("[Game ends after reaching 2048. Turn of END_AT_2048 macro]\n");
+        ft_fprintf(STDERR_FILENO, "Error\nWin value can never be reached: %d\n", WIN_VALUE);
+        ft_fprintf(STDERR_FILENO, "[Game ends after reaching 2048. Turn of END_AT_2048 macro]\n");
         exit(1);
     };
 
