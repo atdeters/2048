@@ -37,6 +37,16 @@ void settings(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     int grid_size_before = data->grid_size;
     while(true) {
+
+        getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
+        if (data->grid_max_x < 43 || data->grid_max_y < 17) {
+            clear();
+            printw("Window too small! Minimum = [43,17]\n");
+            getch();
+            continue;
+        }
+
+
         render_settings(data);
         int ch = getch();
 

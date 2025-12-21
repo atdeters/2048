@@ -9,6 +9,16 @@ void menu(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     while(true) {
 
+
+        getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
+        if (data->grid_max_x < 43 || data->grid_max_y < 17) {
+            clear();
+            printw("Window too small! Minimum = [43,17]\n");
+            getch();
+            continue;
+        }
+
+
         if (data->game_on) {
             render_menu_on(data);
         }

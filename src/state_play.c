@@ -109,15 +109,17 @@ int play(Data *data) {
     data->menu_state = FLD_PLAY;
     while(true) {
         res = 0;
-        /*
+
+
+
         getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
-        if (data->grid_max_x < 10 || data->grid_max_y < 17) {
+        if (data->grid_max_x < 43 || data->grid_max_y < 17) {
             clear();
-            printw("Window too small!\n");
+            printw("Window too small! Minimum = [43,17]\n");
             getch();
             continue;
         }
-        */
+
 
 
 
