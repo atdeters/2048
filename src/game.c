@@ -4,7 +4,6 @@
 #include <ncurses.h>
 #include <time.h>
 #include <unistd.h>
-#include "locale.h"
 #include "../inc/data.h"
 #include "../inc/game.h"
 #include "../inc/state_play.h"
@@ -107,7 +106,6 @@ void init(Data *data) {
 
     // Initialize ncurses
     srand(time(NULL));
-    setlocale(LC_ALL, "");
     initscr();              // Like mlx_init for ncurses basically
     cbreak();               // Disable line buffering (So you don't need to press enter to get a key input)
     noecho();               // Do not display typed characters
