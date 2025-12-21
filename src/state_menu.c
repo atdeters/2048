@@ -14,16 +14,21 @@
 # define PUINHL 0
 
 static void print_border(unsigned int len) {
+    attron(COLOR_PAIR(PGRID));
     addch('+');
-    for (size_t i = 0; i < len - 2; i++) {
+    for (size_t i = 0; i < len; i++) {
         addch('-');
     }
     addch('+');
+    attroff(COLOR_PAIR(PGRID));
 }
 
 static void print_botton(char *name, char *buttons, bool highlight) {
 
-    addch('|');
+
+    attron(COLOR_PAIR(PGRID));
+    addstr("||");
+    attroff(COLOR_PAIR(PGRID));
     if (highlight) {
         attron(COLOR_PAIR(PUIHL));
     }
@@ -42,7 +47,9 @@ static void print_botton(char *name, char *buttons, bool highlight) {
     else {
         attroff(COLOR_PAIR(PUINHL));
     }
-    addch('|');
+    attron(COLOR_PAIR(PGRID));
+    addstr("||");
+    attroff(COLOR_PAIR(PGRID));
 }
 
 void render_menu_main(Data *data) {
@@ -63,7 +70,6 @@ void render_menu_main(Data *data) {
     print_border(MENU_WIDTH);
     refresh();
 }
-
 
 void menu(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);

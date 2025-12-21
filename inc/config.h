@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# include "../themes/theme-original.h"
+# include "../themes/theme-nightdrive.h"
 
 # define INIT_GRID_SIZE 4
 # define INIT_LOOSING_COND false

@@ -20,5 +20,6 @@
 
 # define COL_BACK 0xFFFFFF   // White Background
 # define COL_GRID 0xD0D0D0   // Light Grid
+# define COL_BACKFONT 0x000000
 
 #endif

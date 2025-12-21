@@ -20,5 +20,6 @@
 
 # define COL_BACK 0xECEFEA   // Polar Fog
 # define COL_GRID 0x7FD8C6   // Mint Grid
+# define COL_BACKFONT 0x000000
 
 #endif

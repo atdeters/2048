@@ -21,4 +21,6 @@
 # define COL_BACK 0x121417   // Pure Carbon
 # define COL_GRID 0x3A3F46   // Steel Grid
 
+# define COL_BACKFONT 0xFFFFFF
+
 #endif

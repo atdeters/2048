@@ -21,4 +21,6 @@
 # define COL_BACK 0xF4F6F2   // Fog White
 # define COL_GRID 0x8FA88A   // Moss Grid
 
+# define COL_BACKFONT 0x000000
+
 #endif

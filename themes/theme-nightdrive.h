@@ -20,5 +20,6 @@
 
 # define COL_BACK 0x0E1220   // Nightdrive: Midnight Background
 # define COL_GRID 0x4A463F   // Nightdrive: Neon Cyan Grid
+# define COL_BACKFONT 0xFFFFFF
 
 #endif // !THEME_NIGHTDRIVE_H

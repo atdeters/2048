@@ -17,8 +17,10 @@
 # define COL14 0xE4D96F  // Figma: Straw
 # define COL15 0xFA5053  // Figma: Strawberry
 # define COL16 0x873260  // Figma: Boysenberry
+
 # define COL_BACK 0x000000
 # define COL_GRID 0x0BDA51 // Figma: Malachit
+# define COL_BACKFONT 0xFFFFFF
 
 #endif // !THEME_RANDOM_FIGMA_H
 

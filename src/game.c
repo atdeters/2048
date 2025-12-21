@@ -96,6 +96,9 @@ void init(Data *data) {
 
     // Colors
     start_color();          // TODO: Check if this is dangerous if terminal doesnt allow colors
+    init_color_hex(BACKGROUND, COL_BACK);
+    init_color_hex(BACKFONT, COL_BACKFONT);
+    init_color_hex(GRID, COL_GRID);
     init_color_hex(CL1, COL1);
     init_color_hex(CL2, COL2);
     init_color_hex(CL3, COL3);
@@ -112,9 +115,10 @@ void init(Data *data) {
     init_color_hex(CL14, COL14);
     init_color_hex(CL15, COL15);
     init_color_hex(CL16, COL16);
-    init_color_hex(BACKGROUND, COL_BACK);
-    init_color_hex(GRID, COL_GRID);
 
+    init_pair(PBACK, BACKFONT, BACKGROUND);
+    bkgd(COLOR_PAIR(PBACK));
+    init_pair(PGRID, GRID, GRID);
     init_pair(P2, COLOR_BLACK, CL1);
     init_pair(P4, COLOR_BLACK, CL2);
     init_pair(P8, COLOR_BLACK, CL3);
@@ -131,8 +135,7 @@ void init(Data *data) {
     init_pair(P16384, COLOR_BLACK, CL14);
     init_pair(P32768, COLOR_BLACK, CL15);
     init_pair(P65536, COLOR_BLACK, CL16);
-    init_pair(PBACK, BACKGROUND, BACKGROUND);
-    init_pair(PGRID, COLOR_BLACK, GRID);
+
 }
 
 void quit(void) {

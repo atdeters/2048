@@ -20,14 +20,15 @@ enum e_colors {
     CL15,
     CL16,
     BACKGROUND,
+    BACKFONT,
     GRID,
-    FONT1,
-    FONT2,
 };
 
 // These are a mix of background and foreground color
 enum e_pairs {
-    P2 = 1,
+    PBACK = 1,
+    PGRID,
+    P2,
     P4,
     P8,
     P16,
@@ -42,9 +43,7 @@ enum e_pairs {
     P8192,
     P16384,
     P32768,
-    P65536,
-    PBACK,
-    PGRID
+    P65536
 };
 
 void init_color_rgb(short col, short r, short g, short b);

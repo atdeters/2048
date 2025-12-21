@@ -17,8 +17,10 @@
 # define COL14 0xEDC22E
 # define COL15 0xEDC22E
 # define COL16 0xEDC22E
+
 # define COL_BACK 0xCDC1B4
 # define COL_GRID 0xBBADA0
+# define COL_BACKFONT 0x000000
 
 // Text (2-4): 0x776E65
 // TEXT REST: 0xF9F6F2

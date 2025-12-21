@@ -80,7 +80,9 @@ void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
 	int textstart   = x_center - (ft_count_digits(grid_num) / 2);
  	attron(COLOR_PAIR(color));
 	move(y_center, textstart);
-	printw("%u", grid_num);
+    if (grid_num != 0) {
+        printw("%u", grid_num);
+    }
 	attroff(COLOR_PAIR(color));
 
 }

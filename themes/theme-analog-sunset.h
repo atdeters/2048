@@ -20,5 +20,6 @@
 
 # define COL_BACK 0xF2E6D8   // Aged Paper
 # define COL_GRID 0xC46A4A   // Sunset Grid
+# define COL_BACKFONT 0x000000
 
 #endif
