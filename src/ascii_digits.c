@@ -116,7 +116,7 @@ int	print_ascii_digits(unsigned int nb, int x_center, int y_center)
 
 	num = ft_itoa((int)nb);
 	if (!num)
-		exit(1);
+		return(1);
 
 	len = 0;
 	while (num[len])
