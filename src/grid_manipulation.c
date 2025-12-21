@@ -25,7 +25,7 @@ void	fill_stack(unsigned int *stack, unsigned int grid[5][5], uint8_t i, uint8_t
 	}
 }
 
-void	evaluate_stack(unsigned int *stack, uint8_t i, uint8_t grid_size) {
+void	evaluate_stack(unsigned int *stack, uint8_t i, uint8_t grid_size, Data *data) {
 	unsigned int	top = 0;
 	unsigned int	next = 0;
 	uint8_t			len_to_top = 0;
@@ -59,6 +59,7 @@ void	evaluate_stack(unsigned int *stack, uint8_t i, uint8_t grid_size) {
 	}
 	else if (top > 0 && next > 0 && top == next) {
 		*stack = top * 2;
+		data->score += *stack;
 		if (len_to_top > 0)
 			*(stack + len_to_top) = 0; // THIS TOO :D
 		if (len_to_next > 0)
@@ -71,7 +72,7 @@ void	evaluate_stack(unsigned int *stack, uint8_t i, uint8_t grid_size) {
 		if (len_to_next > 0 && *(stack + len_to_next) == 0)
 			*(stack + len_to_next) = 0;
 	}
-	evaluate_stack(stack + 1, i, grid_size - 1);
+	evaluate_stack(stack + 1, i, grid_size - 1, data);
 }
 
 void store_stack(unsigned int *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
@@ -112,7 +113,7 @@ void    update_grid(Data *data, enum e_dir direction) {
     for (uint8_t i = 0; i < data->grid_size; i++) {
 		bzero_stack(stack, data->grid_size);
 		fill_stack(stack, data->grid, i, data->grid_size, direction);
-		evaluate_stack(stack, i, data->grid_size);
+		evaluate_stack(stack, i, data->grid_size, data);
 		store_stack(stack, data->grid, i, data->grid_size, direction);
 	}
     update_empty_fields(data);

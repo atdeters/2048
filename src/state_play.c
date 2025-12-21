@@ -5,10 +5,32 @@
 #include "../inc/helpers.h"
 #include "../inc/menu.h"
 #include "../inc/config.h"
+#include "../inc/colors.h"
 #include <ncurses.h>
 #include <stdint.h>
 #include <ncursesw/curses.h>
 #include "stdlib.h"
+#include <time.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+void    set_new_highscore(Data *data, size_t moves) {
+    time_t      timer;
+    char        buffer[26];
+    struct tm   *tm_info;
+
+    timer = time(NULL);
+    tm_info = localtime(&timer);
+    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
+    // ft_fprintf(data->highscores_fd, "Score:%zu, Moves:%zu\n", data->score, moves, buffer);
+
+    dprintf(data->highscores_fd, "Score:%zu, Moves:%zu, ", data->score, moves);
+    dprintf(data->highscores_fd, "%s", buffer);
+    dprintf(data->highscores_fd, "\n");
+    data->highscore = data->score;
+
+    return ;
+}
 
 
 // State: Won: Continue, Restart, Menu, Quit
@@ -62,12 +84,23 @@ int popup(Data *data, enum e_end end) {
 }
 
 int play(Data *data) {
+    size_t  moves = 0;
+
+    data->score = 0;
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     data->menu_state = FLD_PLAY;
     while(true) {
         if (render_grid(data, &data->cell)) {
             return 1;
         }
+        move(0, 1);
+        if (data->score > data->highscore)
+            set_new_highscore(data, moves);
+        attron(COLOR_PAIR(PSCORE));
+        printw("Score: %zu Moves: %zu. Best: %zu", data->score, moves, data->highscore);
+        attroff(COLOR_PAIR(PSCORE));
+        // move(1, 0);
+
         if (!data->cont && is_won(data)) {
             data->won = true;
             if (WIN_VALUE != 2048 && is_lost(data)) { // In this case just checks if 2048 got reached
@@ -142,6 +175,7 @@ int play(Data *data) {
         for (size_t i = 0; i < 5; i++) {
             for (size_t j = 0; j < 5; j++) {
                 if (tmp[i][j] != data->grid[i][j]) {
+                    moves++;
                     add_rnd(data);
                     didbreak = true;
                     break;

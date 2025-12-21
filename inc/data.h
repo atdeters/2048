@@ -49,6 +49,9 @@ typedef struct s_data {
     bool            game_on;
     bool            won;
     bool            cont;
+    size_t          score;
+    size_t          highscore;
+    int             highscores_fd;
 } Data;
 
 #endif // ! DATA_H
