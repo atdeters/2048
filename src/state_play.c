@@ -21,6 +21,7 @@ int play(Data *data) {
             // TODO: Add a pop up
             move(1,1);
             printw("You won the game!\n");
+            // Continue, Restart, Menu, Quit
             getch();
             data->won = true;
         }
@@ -29,6 +30,8 @@ int play(Data *data) {
             printw("You lost the game!\n");
 
             // TODO: Make this a pop up
+            //
+            // Restart, Menu, Quit
             getch();
             init_data(data, data->grid_size);
             data->state = ST_MENU;
