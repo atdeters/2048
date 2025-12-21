@@ -6,9 +6,10 @@
 #include <ncurses.h>
 
 
-# define MENU_MAIN_FIELDS 3 // Cannot be smaller than 2
+# define MENU_MAIN_FIELDS_ON 4 // Cannot be smaller than 2
+# define MENU_MAIN_FIELDS_OFF 3 // Cannot be smaller than 2
+# define SETTINGS_FIELDS 4
 # define MENU_WIDTH 30
-# define MENU_HEIGHT (MENU_MAIN_FIELDS + 2)
 
 // TODO: Make these part of a theme!
 # define PUIHL P2
@@ -54,7 +55,7 @@ static void print_botton(char *name, char *buttons, bool highlight) {
 void render_menu_off(Data *data) {
     clear();
     int x = (data->grid_max_x / 2) - (MENU_WIDTH / 2);
-    int y = (data->grid_max_y / 2) - (MENU_HEIGHT / 2);
+    int y = (data->grid_max_y / 2) - ((MENU_MAIN_FIELDS_OFF + 2) / 2);
 
     move(y, x);
     print_border(MENU_WIDTH);
@@ -72,7 +73,7 @@ void render_menu_off(Data *data) {
 void render_menu_on(Data *data) {
     clear();
     int x = (data->grid_max_x / 2) - (MENU_WIDTH / 2);
-    int y = (data->grid_max_y / 2) - (MENU_HEIGHT / 2);
+    int y = (data->grid_max_y / 2) - ((MENU_MAIN_FIELDS_ON + 2) / 2);
 
     move(y, x);
     print_border(MENU_WIDTH);
@@ -109,7 +110,7 @@ void print_label(const char *label) {
 void render_settings(Data *data) {
     clear();
     int x = (data->grid_max_x / 2) - (MENU_WIDTH / 2);
-    int y = (data->grid_max_y / 2) - (MENU_HEIGHT / 2);
+    int y = (data->grid_max_y / 2) - ((SETTINGS_FIELDS + 2) / 2);
 
     move(y, x);
     print_border(MENU_WIDTH);

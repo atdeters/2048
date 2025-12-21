@@ -59,7 +59,6 @@ void play(Data *data) {
             }
         }
 
-
         if (ch == KEY_LEFT || ch == 'a' || ch == 'A' || ch == 'h' || ch == 'H') {
             update_grid(data, LEFT);
         }
