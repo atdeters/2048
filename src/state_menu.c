@@ -193,7 +193,6 @@ void settings(Data *data) {
             }
         }
 
-
         // Going up and down in the menu
         else if (ch == KEY_UP || ch == 'w' || ch == 'W' || ch == 'k' || ch == 'K') {
             if (data->settings_state != FLD_4) {
@@ -234,9 +233,6 @@ void menu(Data *data) {
             continue;
         }
 
-
-
-
         else if (ch == 'p' || ch == 'P') {
             data->state = ST_PLAY;
             data->game_on = true;
@@ -253,6 +249,9 @@ void menu(Data *data) {
         }
         else if (ch == 'e' || ch == 'E') {
             settings(data);
+            if (data->state == ST_EXIT) {
+                return;
+            }
         }
 
         // Enter key depending on the current state
@@ -267,6 +266,9 @@ void menu(Data *data) {
                     return;
                 case FLD_SETT:
                     settings(data);
+                    if (data->state == ST_EXIT) {
+                        return;
+                    }
                     break;
                 case FLD_RESTART:
                     data->state = ST_RESTART;

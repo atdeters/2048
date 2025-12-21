@@ -31,7 +31,6 @@ int	is_power_of_2(unsigned int n)
 {
 	unsigned int	i;
 
-
 	i = 1;
 	while (i <= n)
 	{
@@ -39,7 +38,6 @@ int	is_power_of_2(unsigned int n)
 			return (1);
 		i *= 2;
 	}
-	printf("Error\nWIN_VALUE is not a power of 2\n");
 	return (0);
 }
 

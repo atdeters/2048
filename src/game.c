@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
 #include <time.h>
@@ -79,9 +80,22 @@ void init_data(Data *data, uint8_t grid_size) {
 
 void init(Data *data) {
 
-	if (WIN_VALUE < 0 || !is_power_of_2(WIN_VALUE))
-		exit(1);
-    // Initialize game data
+
+    if (!is_power_of_2(WIN_VALUE)) {
+	    printf("Error\nWIN_VALUE is not a power of 2\n");
+        exit(1);
+    }
+    else if (WIN_VALUE <= 4) {
+	    printf("Error\nWIN_VALUE to small: %d\n", WIN_VALUE);
+        printf("[Game starts with 2/4]\n");
+        exit(1);
+    }
+    else if (END_AT_2048 && WIN_VALUE > 2048) {
+        printf("Error\nWin value can never be reached: %d\n", WIN_VALUE);
+        printf("[Game ends after reaching 2048. Turn of END_AT_2048 macro]\n");
+        exit(1);
+    };
+
 
     data->grid_size = INIT_GRID_SIZE;
     data->state = ST_MENU;
@@ -140,7 +154,6 @@ void init(Data *data) {
     init_pair(P16384, COLOR_BLACK, CL14);
     init_pair(P32768, COLOR_BLACK, CL15);
     init_pair(P65536, COLOR_BLACK, CL16);
-
 }
 
 void quit(void) {

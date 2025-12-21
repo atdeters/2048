@@ -10,7 +10,7 @@
 # define END_AT_2048 true
 
 enum e_const {
-    WIN_VALUE = 16
+    WIN_VALUE = 2048
 };
 
 #endif // !CONFIG_H
