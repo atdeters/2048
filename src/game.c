@@ -95,7 +95,7 @@ void init(Data *data) {
     curs_set(0);            // Hide cursor on screen (usually it is blinking in the shell)
 
     // Colors
-    start_color();          // TODO: Check if this is dangerous if terminal doesnt allow colors
+    start_color();
     init_color_hex(BACKGROUND, COL_BACK);
     init_color_hex(BACKFONT, COL_BACKFONT);
     init_color_hex(GRID, COL_GRID);

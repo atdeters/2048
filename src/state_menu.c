@@ -10,6 +10,7 @@
 # define MENU_WIDTH 30
 # define MENU_HEIGHT (MENU_MAIN_FIELDS + 2)
 
+// TODO: Make these part of a theme!
 # define PUIHL P2
 # define PUINHL 0
 
