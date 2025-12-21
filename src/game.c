@@ -114,22 +114,22 @@ void init(Data *data) {
     init_color_hex(BACKGROUND, COL_BACK);
     init_color_hex(GRID, COL_GRID);
 
-    init_pair(P1, COLOR_BLACK, CL1);
-    init_pair(P2, COLOR_BLACK, CL2);
-    init_pair(P3, COLOR_BLACK, CL3);
-    init_pair(P4, COLOR_BLACK, CL4);
-    init_pair(P5, COLOR_BLACK, CL5);
-    init_pair(P6, COLOR_BLACK, CL6);
-    init_pair(P7, COLOR_BLACK, CL7);
-    init_pair(P8, COLOR_BLACK, CL8);
-    init_pair(P9, COLOR_BLACK, CL9);
-    init_pair(P10, COLOR_BLACK, CL10);
-    init_pair(P11, COLOR_BLACK, CL11);
-    init_pair(P12, COLOR_BLACK, CL12);
-    init_pair(P13, COLOR_BLACK, CL13);
-    init_pair(P14, COLOR_BLACK, CL14);
-    init_pair(P15, COLOR_BLACK, CL15);
-    init_pair(P16, COLOR_BLACK, CL16);
+    init_pair(P2, COLOR_BLACK, CL1);
+    init_pair(P4, COLOR_BLACK, CL2);
+    init_pair(P8, COLOR_BLACK, CL3);
+    init_pair(P16, COLOR_BLACK, CL4);
+    init_pair(P32, COLOR_BLACK, CL5);
+    init_pair(P64, COLOR_BLACK, CL6);
+    init_pair(P128, COLOR_BLACK, CL7);
+    init_pair(P256, COLOR_BLACK, CL8);
+    init_pair(P512, COLOR_BLACK, CL9);
+    init_pair(P1024, COLOR_BLACK, CL10);
+    init_pair(P2048, COLOR_BLACK, CL11);
+    init_pair(P4096, COLOR_BLACK, CL12);
+    init_pair(P8192, COLOR_BLACK, CL13);
+    init_pair(P16384, COLOR_BLACK, CL14);
+    init_pair(P32768, COLOR_BLACK, CL15);
+    init_pair(P65536, COLOR_BLACK, CL16);
     init_pair(PBACK, BACKGROUND, BACKGROUND);
     init_pair(PGRID, GRID, GRID);
 }
