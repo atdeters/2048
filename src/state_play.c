@@ -33,7 +33,6 @@ void    set_new_highscore(Data *data, size_t moves) {
 }
 
 int popup(Data *data, enum e_end end) {
-    data->popup_state = FLD_PLAY;
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
     while(true) {
 
@@ -85,9 +84,14 @@ int popup(Data *data, enum e_end end) {
             }
         }
         else if (ch == KEY_UP || ch == 'w' || ch == 'W' || ch == 'k' || ch == 'K') {
-            if (data->popup_state != FLD_RESTART) {
+            if (end != WON && data->popup_state != FLD_RESTART) {
                 data->popup_state -= 1;
             }
+            else if (end == WON && data->popup_state != FLD_PLAY) {
+                data->popup_state -= 1;
+            }
+
+
         }
         else if (ch == KEY_DOWN || ch == 's' || ch == 'S' || ch == 'j' || ch == 'J') {
             if (data->popup_state != FLD_QUIT) {
@@ -120,17 +124,20 @@ int play(Data *data) {
         if (!data->cont && is_won(data)) {
             data->won = true;
             if (WIN_VALUE != 2048 && is_lost(data)) { // In this case just checks if 2048 got reached
+                data->popup_state = FLD_RESTART;
                 if (popup(data, END)) {
                     return 0;
                 }
             }
             else if (popup(data, WON)) {
+                data->popup_state = FLD_PLAY;
                 return 0;
             }
             data->cont = true;
             continue;
         }
         else if (is_lost(data)) {
+            data->popup_state = FLD_RESTART;
             if (data->won) {
                 if (popup(data, WON_OVER)) {
                     return 0;
