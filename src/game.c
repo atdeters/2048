@@ -9,11 +9,8 @@
 #include "../inc/state_menu.h"
 #include "../inc/colors.h"
 
-#include "../themes/theme-nightdrive.h"
+#include "../inc/config.h"
 
-#define INIT_GRID_SIZE 4
-#define INIT_LOOSING_COND true
-#define LOSE_INSTANT true
 
 static uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
