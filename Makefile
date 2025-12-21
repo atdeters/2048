@@ -51,12 +51,10 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -f $(OBJS) $(DEPS)
-	@$(MAKE) -C clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -rf $(OBJ_DIR)
-	@$(MAKE) -C fclean
 
 re: fclean all
 
