@@ -47,6 +47,9 @@ typedef struct s_data {
     enum e_sett     settings_state;
     bool            game_on;
     bool            won;
+    size_t          score;
+    size_t          highscore;
+    int             highscores_fd;
 } Data;
 
 #endif // ! DATA_H

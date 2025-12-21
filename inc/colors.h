@@ -28,6 +28,7 @@ enum e_colors {
 enum e_pairs {
     PBACK = 1,
     PGRID,
+    PSCORE,
     P2,
     P4,
     P8,

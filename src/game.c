@@ -78,8 +78,30 @@ void init_data(Data *data, uint8_t grid_size) {
     add_rnd(data);
 }
 
-int init(Data *data) {
+int read_highscore(Data *data) {
+    size_t  highscore = 0;
+    size_t  read_score;
+    char    *line;
 
+    if (data->highscores_fd == -1)
+        return (ft_fprintf(2, "Error: Failed to open highscores files\n."), 1);
+    while (1) {
+        line = get_next_line(data->highscores_fd);
+        if (!line) {
+            data->highscore = highscore;
+            get_next_line(-1);
+            return (0);
+        }
+        read_score = atoll(line + 6);
+        if (read_score > highscore)
+            highscore = read_score;
+        free(line);
+    }
+    return (0);
+}
+
+int init(Data *data) {
+    char buf[1024];
 
     if (!is_power_of_2(WIN_VALUE)) {
 	    ft_fprintf(STDERR_FILENO, "Error\nWIN_VALUE is not a power of 2\n");
@@ -96,7 +118,7 @@ int init(Data *data) {
         return 1;
     };
 
-
+    data->highscores_fd = open("highscores", O_RDWR | O_CREAT, 0666);
     data->grid_size = INIT_GRID_SIZE;
     data->state = ST_MENU;
     data->menu_state = FLD_PLAY;
@@ -104,6 +126,10 @@ int init(Data *data) {
     data->game_on = false;
     data->won = false;
 
+    if (read_highscore(data))
+        return (1);
+    while (read(data->highscores_fd, buf, 1024) > 0)
+        ;
     // Initialize ncurses
     srand(time(NULL));
     initscr();              // Like mlx_init for ncurses basically
@@ -137,6 +163,7 @@ int init(Data *data) {
     init_pair(PBACK, BACKFONT, BACKGROUND);
     bkgd(COLOR_PAIR(PBACK));
     init_pair(PGRID, GRID, GRID);
+    init_pair(PSCORE, COLOR_BLACK, GRID);
     init_pair(P2, COLOR_BLACK, CL1);
     init_pair(P4, COLOR_BLACK, CL2);
     init_pair(P8, COLOR_BLACK, CL3);
