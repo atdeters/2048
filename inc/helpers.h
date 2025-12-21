@@ -13,5 +13,6 @@ void test_filling_grid(Data *data);
 void display_grid(Data *data);
 void add_rnd(Data *data);
 bool is_lost(Data *data);
+void free_split(char **split);
 
 #endif // ! HELPERS_C

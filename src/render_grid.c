@@ -2,9 +2,10 @@
 #include <stdint.h>
 #include "../inc/render_grid.h"
 #include <ncursesw/curses.h>
-#include "../inc/colors.h"
+#include "colors.h"
+#include "../inc/ascii_digits.h"
 
-int	ft_count_digits(unsigned int n)
+int	ft_count_digits(int n)
 {
 	int			digits;
 	long int	num;
@@ -21,6 +22,27 @@ int	ft_count_digits(unsigned int n)
 		digits++;
 	}
 	return (digits);
+}
+
+int	getmax_digit(Data *data)
+{
+	int y = 0;
+	int x;
+
+	int max = 0;
+	while (y < data->grid_size) // loops through each cell per col
+	{
+		x = 0;
+		while (x < data->grid_size) // loops through each cell per row
+		{
+			if (data->grid[y][x] > (unsigned int) max)
+				max = data->grid[y][x];
+			x++;
+		}
+		y++;
+	}
+	int max_digits = ft_count_digits(max);
+	return (max_digits);
 }
 
 
@@ -62,29 +84,37 @@ short	get_color(unsigned int nb)
 	return P65536;
 }
 
-void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
+void	color_cell(Data *data, Cell *cell, int x, int y, int max_digits)
 {
+	unsigned int grid_num = data->grid[y][x];
 	int start_x = 1 + x * (cell->w + 1);
 	int start_y = 1 + y * (cell->h + 1);
 
 	short color = get_color(grid_num);
-
 	for (int row = 0; row < cell->h; row++){
 		move(start_y + row, start_x);
-		chgat(cell->w, A_NORMAL, color, NULL);
+		if( start_y < data->grid_max_y)
+			chgat(cell->w, A_NORMAL, color, NULL);
 	}
+	int digits = ft_count_digits(grid_num);
 
 	int x_center = start_x + (cell->w / 2);
 	int y_center = start_y + (cell->h / 2);
 
-	int textstart   = x_center - (ft_count_digits(grid_num) / 2);
- 	attron(COLOR_PAIR(color));
-	move(y_center, textstart);
-    if (grid_num != 0) {
-        printw("%u", grid_num);
-    }
-	attroff(COLOR_PAIR(color));
-
+	if (x_center < data->grid_max_x && y_center < data->grid_max_y)
+	{
+		attron(COLOR_PAIR(color));
+		//render ascii_digits if big enough
+		if (cell->h >= 5 && cell->w >= max_digits * 3 + max_digits + 1) //ascii digit is size 3 + spaces between digits and spaces between start and end!
+			print_ascii_digits(grid_num, x_center, y_center);
+		else	/// if small grid render normal ascii chars
+		{
+			int textstart   = x_center - (digits / 2);
+			move(y_center, textstart);
+			printw("%u", grid_num);
+		}
+		attroff(COLOR_PAIR(color));
+	}
 }
 
 void	color_grid(Data *data, Cell *cell)
@@ -93,18 +123,18 @@ void	color_grid(Data *data, Cell *cell)
 	int		x = 0;
 	int y = 0;
 
+	int max_digits = getmax_digit(data);
+
 	while (y < data->grid_size) // loops through each cell per col
 	{
 		x = 0;
 		while (x < data->grid_size) // loops through each cell per row
 		{
-			color_cell(data->grid[y][x], cell, x, y);
+			color_cell(data, cell, x, y, max_digits);
 			x++;
 		}
 		y++;
 	}
-
-	return ;
 }
 
 
@@ -176,8 +206,8 @@ void render_grid(Data *data, Cell *cell)
             mvaddch(y, x++, '-');
     }
     mvaddch(y, x, '+');
+	attroff(COLOR_PAIR(PGRID));
 	color_grid(data, &data->cell);				// fills cells with different colors
-    attroff(COLOR_PAIR(PGRID));
     refresh();
 }
 
