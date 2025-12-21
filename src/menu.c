@@ -105,13 +105,13 @@ void render_popup_won(Data *data) {
     move(y+1, x);
     print_label("Game won!");
     move(y+2, x);
-    print_botton("Resume", "p", data->menu_state == FLD_PLAY ? 1 : 0);
+    print_botton("Resume", "p", data->popup_state == FLD_PLAY ? 1 : 0);
     move(y+3, x);
-    print_botton("Restart", "r", data->menu_state == FLD_RESTART ? 1 : 0);
+    print_botton("Restart", "r", data->popup_state == FLD_RESTART ? 1 : 0);
     move(y+4, x);
-    print_botton("Menu", "m", data->menu_state == FLD_SETT ? 1 : 0);
+    print_botton("Menu", "m", data->popup_state == FLD_SETT ? 1 : 0);
     move(y+5, x);
-    print_botton("Quit", "q", data->menu_state == FLD_QUIT ? 1 : 0);
+    print_botton("Quit", "q", data->popup_state == FLD_QUIT ? 1 : 0);
     move(y+6, x);
     print_border(MENU_WIDTH);
     refresh();
@@ -134,11 +134,11 @@ void render_popup_over(Data *data, enum e_end end) {
         print_label("2048 reached! Congrats");
     }
     move(y+2,x);
-    print_botton("Restart", "r", data->menu_state == FLD_RESTART ? 1 : 0);
+    print_botton("Restart", "r", data->popup_state == FLD_RESTART ? 1 : 0);
     move(y+3, x);
-    print_botton("Menu", "m", data->menu_state == FLD_SETT ? 1 : 0);
+    print_botton("Menu", "m", data->popup_state == FLD_SETT ? 1 : 0);
     move(y+4, x);
-    print_botton("Quit", "q", data->menu_state == FLD_QUIT ? 1 : 0);
+    print_botton("Quit", "q", data->popup_state == FLD_QUIT ? 1 : 0);
     move(y+5, x);
     print_border(MENU_WIDTH);
     refresh();

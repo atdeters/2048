@@ -32,13 +32,6 @@ void    set_new_highscore(Data *data, size_t moves) {
     return ;
 }
 
-
-// State: Won: Continue, Restart, Menu, Quit
-// State: Won - No More moves: Restart, Menu, Quit
-// State: No more moves -> Game Over: Restart, Menu, Quit
-
-
-
 int popup(Data *data, enum e_end end) {
     data->popup_state = FLD_PLAY;
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
@@ -56,10 +49,6 @@ int popup(Data *data, enum e_end end) {
             getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
             continue;
         }
-        else if (ch == KEY_ESCAPE) {
-            data->state = ST_EXIT;
-            return 1;
-        }
         else if (ch == 'p' || ch == 'P') { // Means resume in this case
             data->state = ST_PLAY;
             data->game_on = true;
@@ -69,7 +58,7 @@ int popup(Data *data, enum e_end end) {
             data->state = ST_RESTART;
             return 1;
         }
-        else if (ch == 'q' || ch == 'Q') {
+        else if (ch == 'q' || ch == 'Q' || ch == KEY_ESCAPE) {
             data->state = ST_EXIT;
             return 1;
         }
@@ -77,7 +66,34 @@ int popup(Data *data, enum e_end end) {
             data->state = ST_MENU;
             return 1;
         }
-
+        else if (ch == KEY_ENTER) {
+            switch (data->popup_state) {
+                case FLD_PLAY:
+                    data->state = ST_PLAY;
+                    data->game_on = true;
+                    return 0;
+                case FLD_QUIT:
+                    data->state = ST_EXIT;
+                    return 1;
+                case FLD_SETT:
+                    data->state = ST_MENU;
+                    return 1;
+                    break;
+                case FLD_RESTART:
+                    data->state = ST_RESTART;
+                    return 1;
+            }
+        }
+        else if (ch == KEY_UP || ch == 'w' || ch == 'W' || ch == 'k' || ch == 'K') {
+            if (data->popup_state != FLD_RESTART) {
+                data->popup_state -= 1;
+            }
+        }
+        else if (ch == KEY_DOWN || ch == 's' || ch == 'S' || ch == 'j' || ch == 'J') {
+            if (data->popup_state != FLD_QUIT) {
+                data->popup_state += 1;
+            }
+        }
 
     }
     return 0;
@@ -108,7 +124,7 @@ int play(Data *data) {
                     return 0;
                 }
             }
-            if (popup(data, WON)) {
+            else if (popup(data, WON)) {
                 return 0;
             }
             data->cont = true;

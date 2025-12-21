@@ -4,13 +4,13 @@
 # include "../themes/theme-original.h"
 
 # define INIT_GRID_SIZE 4
-# define INIT_LOOSING_COND false
+# define INIT_LOOSING_COND true
 # define LOSE_INSTANT false
 
-# define END_AT_2048 true
+# define END_AT_2048 false
 
 enum e_const {
-    WIN_VALUE = 2048
+    WIN_VALUE = 8
 };
 
 #endif // !CONFIG_H

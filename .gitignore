@@ -29,6 +29,9 @@
 *.i*86
 *.x86_64
 *.hex
+
+# Our files
+highscores
 2048
 
 # Debug files
