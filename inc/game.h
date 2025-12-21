@@ -23,7 +23,10 @@ enum e_const {
     WIN_VALUE = 2048
 };
 
+void add_rnd(Data *data);
+void update_empty_fields(Data *data);
 void init(Data *data);
+void quit(void);
 void run(Data *data);
 
 #include "helpers.h"

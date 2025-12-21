@@ -1,0 +1,26 @@
+#ifndef THEME_ORIGINAL_HPP
+# define THEME_ORIGINAL_HPP
+
+# define COL1 0xEEE4DA
+# define COL2 0xEDE0C8
+# define COL3 0xF2B179
+# define COL4 0xF59563
+# define COL5 0xF67C5F
+# define COL6 0xF65E3B
+# define COL7 0xEDCF72
+# define COL8 0xEDCC61
+# define COL9 0xEDC850
+# define COL10 0xEDC53F
+# define COL11 0xEDC22E
+# define COL12 0xEDC22E
+# define COL13 0xEDC22E
+# define COL14 0xEDC22E
+# define COL15 0xEDC22E
+# define COL16 0xEDC22E
+# define COL_BACK 0xCDC1B4
+# define COL_GRID 0xBBADA0
+
+// Text (2-4): 0x776E65
+// TEXT REST: 0xF9F6F2
+
+#endif // !THEME_ORIGINAL_HPP

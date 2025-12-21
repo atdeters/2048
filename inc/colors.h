@@ -1,21 +1,6 @@
 #ifndef  COLORS_H
 # define COLORS_H
 
-// Just macros for the different colors
-#define COL1 0x007BA7   // Figma: Cerulean
-#define COL2 0xFFC067   // Figma: Pastel Orange
-#define COL3 0x98A869   // Figma: Green Sage
-#define COL4 0xC11C84   // Figma: Dark Pink
-#define COL5 0xCD1C18   // Figma: Chili Red
-#define COL6 0x6D8196   // Figma: Slate Gray
-#define COL7 0x2E6F40   // Figma: Forrest Green
-#define COL8 0x636B2F   // Firma: Olive Green
-#define COL9 0x4682B4   // Figma: Steel Blue
-#define COL10 0xF88379  // Figma: Coral Pink
-#define COL11 0xFFA6C9  // Figma: Carnation Pink
-#define COL12 0xE40078  // Figma: Red Purple
-#define COL13 0xE4D00A  // Figma: Citrine Color
-
 // These are set to a ceratin rgb value
 enum e_colors {
     CL1 = 9,
@@ -30,24 +15,36 @@ enum e_colors {
     CL10,
     CL11,
     CL12,
-    CL13
+    CL13,
+    CL14,
+    CL15,
+    CL16,
+    BACKGROUND,
+    GRID,
+    FONT1,
+    FONT2,
 };
 
 // These are a mix of background and foreground color
 enum e_pairs {
-    P1 = 1,
-    P2,
-    P3,
+    P2 = 1,
     P4,
-    P5,
-    P6,
-    P7,
     P8,
-    P9,
-    P10,
-    P11,
-    P12,
-    P13,
+    P16,
+    P32,
+    P64,
+    P128,
+    P256,
+    P512,
+    P1024,
+    P2048,
+    P4096,
+    P8192,
+    P16384,
+    P32768,
+    P65536,
+    PBACK,
+    PGRID
 };
 
 void init_color_rgb(short col, short r, short g, short b);

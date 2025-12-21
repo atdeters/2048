@@ -1,6 +1,6 @@
-#include "state_play.h"
-#include "game.h"
+#include <ncurses.h>
 #include <stdint.h>
+#include "../inc/render_grid.h"
 #include <ncursesw/curses.h>
 #include "colors.h"
 
@@ -26,35 +26,41 @@ int	ft_count_digits(unsigned int n)
 
 short	get_color(unsigned int nb)
 {
-	if (nb == (1 << 1))
-		return P1;
-	if (nb == (1 << 2))
+    if (nb == 0) {
+        return PBACK;
+    }
+    else if (nb == (1 << 1))
 		return P2;
-	if (nb == (1 << 3))
-		return P3;
-	if (nb == (1 << 4))
+    else if (nb == (1 << 2))
 		return P4;
-	if (nb == (1 << 5))
-		return P5;
-	if (nb == (1 << 6))
-		return P6;
-	if (nb == (1 << 7))
-		return P7;
-	if (nb == (1 << 8))
+    else if (nb == (1 << 3))
 		return P8;
-	if (nb == (1 << 9))
-		return P9;
-	if (nb == (1 << 10))
-		return P10;
-	if (nb == (1 << 11))
-		return P11;
-	if (nb == (1 << 12))
-		return P12;
-	if (nb == (1 << 13))
-		return P13;
-	return P9;
+    else if (nb == (1 << 4))
+		return P16;
+    else if (nb == (1 << 5))
+		return P32;
+    else if (nb == (1 << 6))
+		return P64;
+    else if (nb == (1 << 7))
+		return P128;
+    else if (nb == (1 << 8))
+		return P256;
+    else if (nb == (1 << 9))
+		return P512;
+    else if (nb == (1 << 10))
+		return P1024;
+    else if (nb == (1 << 11))
+		return P2048;
+    else if (nb == (1 << 12))
+		return P4096;
+    else if (nb == (1 << 13))
+		return P8192;
+    else if (nb == (1 << 14))
+		return P16384;
+    else if (nb == (1 << 15))
+		return P32768;
+	return P65536;
 }
-
 
 void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
 {
@@ -125,6 +131,7 @@ static void compute_cell_size(Data *data, Cell *cell)
 
 void render_grid(Data *data, Cell *cell)
 {
+    attron(COLOR_PAIR(PGRID));
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
 	compute_cell_size(data, cell);
 
@@ -170,6 +177,7 @@ void render_grid(Data *data, Cell *cell)
     }
     mvaddch(y, x, '+');
 	color_grid(data, &data->cell);				// fills cells with different colors
+    attroff(COLOR_PAIR(PGRID));
     refresh();
 }
 

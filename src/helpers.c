@@ -1,6 +1,9 @@
 #include "../inc/helpers.h"
 #include "../inc/data.h"
+#include <ncurses.h>
 #include <stdint.h>
+
+#include <stdlib.h>
 
 uint16_t min(uint16_t a, uint16_t b) {
     if (a < b)
@@ -23,7 +26,7 @@ int	is_power_of_2(unsigned int n)
 	return (0);
 }
 
-void add_nb_to_grid(Data *data, uint8_t field_nb, uint8_t value) {
+void add_nb_to_grid(Data *data, uint8_t field_nb, unsigned int value) {
     uint8_t grid_x = field_nb;
     uint8_t grid_y = 0;
     while (grid_x >= (*data).grid_size) {
@@ -70,4 +73,21 @@ void display_grid(Data *data) {
         printw("\n");
     }
     refresh();
+}
+
+bool is_lost(Data *data) {
+    for (size_t i = 0; i < data->grid_size; i++) {
+        for (size_t j = 0; j < data->grid_size; j++) {
+            if (data->empty_fields.idx != -1) {
+                return false;
+            }
+            if (j < data->grid_size - 1 && data->grid[i][j] == data->grid[i][j+1]) {
+                return false;
+            }
+            if (i < data->grid_size - 1 && data->grid[i][j] == data->grid[i+1][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }

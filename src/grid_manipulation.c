@@ -1,12 +1,12 @@
 #include "../inc/game.h"
 
-void	bzero_stack(uint8_t *stack, uint8_t grid_size) {
+void	bzero_stack(unsigned int *stack, uint8_t grid_size) {
 	for (uint8_t i = 0; i < grid_size; i++) {
 		stack[i] = 0;
 	}
 }
 
-void	fill_stack(uint8_t *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
+void	fill_stack(unsigned int *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
 	for (uint8_t x = 0; x < grid_size; x++) {
 		switch (direction) {
 			case LEFT:
@@ -25,7 +25,7 @@ void	fill_stack(uint8_t *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid
 	}
 }
 
-void	evaluate_stack(uint8_t *stack, uint8_t i, uint8_t grid_size) {
+void	evaluate_stack(unsigned int *stack, uint8_t i, uint8_t grid_size) {
 	unsigned int	top = 0;
 	unsigned int	next = 0;
 	uint8_t			len_to_top = 0;
@@ -74,25 +74,26 @@ void	evaluate_stack(uint8_t *stack, uint8_t i, uint8_t grid_size) {
 	evaluate_stack(stack + 1, i, grid_size - 1);
 }
 
-void	store_stack(uint8_t *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
+void store_stack(unsigned int *stack, unsigned int grid[5][5], uint8_t i, uint8_t grid_size, enum e_dir direction) {
 	for (uint8_t x = 0; x < grid_size; x++) {
 		switch (direction) {
 			case LEFT:
-				grid[i][x] = stack[x];
+                grid[i][x] = stack[x];
 				break ;
 			case RIGHT:
-				grid[i][grid_size - 1 - x] = stack[x];
+                grid[i][grid_size - 1 - x] = stack[x];
 				break ;
 			case DOWN:
-				grid[grid_size - 1 - x][i] = stack[x];
+                grid[grid_size - 1 - x][i] = stack[x];
 				break ;
 			case UP:
-				grid[x][i] = stack[x];
+                grid[x][i] = stack[x];
 				break ;
 		}
 	}
 }
 
+/*
 void    update_grid(unsigned int grid[5][5], uint8_t grid_size, enum e_dir direction) {
 	uint8_t	stack[grid_size];
 
@@ -102,6 +103,19 @@ void    update_grid(unsigned int grid[5][5], uint8_t grid_size, enum e_dir direc
 		evaluate_stack(stack, i, grid_size);
 		store_stack(stack, grid, i, grid_size, direction);
 	}
+}
+*/
+
+void    update_grid(Data *data, enum e_dir direction) {
+	unsigned int stack[data->grid_size];
+
+    for (uint8_t i = 0; i < data->grid_size; i++) {
+		bzero_stack(stack, data->grid_size);
+		fill_stack(stack, data->grid, i, data->grid_size, direction);
+		evaluate_stack(stack, i, data->grid_size);
+		store_stack(stack, data->grid, i, data->grid_size, direction);
+	}
+    update_empty_fields(data);
 }
 
 // int main(void)
