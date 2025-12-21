@@ -23,6 +23,8 @@ SRCS = \
 	src/ascii_digits.c \
 	src/colors.c \
 	src/set.c \
+	src/menu.c \
+	src/settings.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
