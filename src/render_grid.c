@@ -1,3 +1,4 @@
+#include <ncurses.h>
 #include <stdint.h>
 #include "../inc/render_grid.h"
 #include <ncursesw/curses.h>
@@ -101,6 +102,7 @@ static void compute_cell_size(Data *data, Cell *cell)
 
 void render_grid(Data *data, Cell *cell)
 {
+    attron(COLOR_PAIR(PGRID));
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
 	compute_cell_size(data, cell);
 
@@ -146,6 +148,7 @@ void render_grid(Data *data, Cell *cell)
     }
     mvaddch(y, x, '+');
 	color_grid(data, &data->cell);				// fills cells with different colors
+    attroff(COLOR_PAIR(PGRID));
     refresh();
 }
 

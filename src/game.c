@@ -9,9 +9,11 @@
 #include "../inc/state_menu.h"
 #include "../inc/colors.h"
 
+#include "../themes/theme-nightdrive.h"
+
 #define INIT_GRID_SIZE 4
-#define INIT_LOOSING_COND false
-#define LOSE_INSTANT false
+#define INIT_LOOSING_COND true
+#define LOSE_INSTANT true
 
 static uint8_t get_rand_nb(void) {
     return (rand() % 100 <= CHANCE_4 ? 4 : 2);
@@ -113,6 +115,7 @@ void init(Data *data) {
     init_color_hex(CL15, COL15);
     init_color_hex(CL16, COL16);
     init_color_hex(BACKGROUND, COL_BACK);
+    init_color_hex(GRID, COL_GRID);
 
     init_pair(P1, COLOR_BLACK, CL1);
     init_pair(P2, COLOR_BLACK, CL2);
@@ -131,6 +134,7 @@ void init(Data *data) {
     init_pair(P15, COLOR_BLACK, CL15);
     init_pair(P16, COLOR_BLACK, CL16);
     init_pair(PBACK, BACKGROUND, BACKGROUND);
+    init_pair(PGRID, GRID, GRID);
 }
 
 void quit(void) {
