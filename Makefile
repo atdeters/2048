@@ -28,7 +28,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
 DEPFLAGS = -MMD -MP
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: re
@@ -49,12 +49,12 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -f $(OBJS) $(DEPS)
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -rf $(OBJ_DIR)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C fclean
 
 re: fclean all
 

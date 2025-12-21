@@ -5,7 +5,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include "set.h"
-# include "libft/libft.h"
+# include "libft.h"
 
 enum e_states {
     ST_MENU,
