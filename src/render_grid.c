@@ -150,16 +150,16 @@ static void compute_cell_size(Data *data, Cell *cell)
 
     if (usable_w < data->grid_size || usable_h < data->grid_size) // Safety check: if the usable area is smaller than the grid
     {
-        cell->w = 8 ;
-        cell->h = 4;
+        cell->w = 12;
+        cell->h = 6;
         return;
     }
 	cell->w = usable_w / data->grid_size;					//calc usable cell witdh and height by dividing evenly
 	cell->h = usable_h / data->grid_size;
 	if (cell->w < 3)										//enforce minimum cellsize for cell_w and cell_h
-	    cell->w = 8;
+	    cell->w = 12;
 	if (cell->h < 3)
-	    cell->h = 4;
+	    cell->h = 6;
 }
 
 
