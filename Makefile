@@ -9,10 +9,8 @@ OBJ_DIR     = obj
 INC_DIR     = inc
 INCLUDES    = -I$(INC_DIR)
 
-LIBFT_DIR   = inc/libft
-LIBFT       = $(LIBFT_DIR)/libft.a
-
 LDLIBS      = -lncurses
+LIBFT		= src/libft.a
 
 SRCS = \
 	src/main.c \
@@ -23,7 +21,7 @@ SRCS = \
 	src/render_grid.c \
 	src/grid_manipulation.c \
 	src/colors.c \
-	src/set.c
+	src/set.c \
 
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
@@ -47,9 +45,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/data.h
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDLIBS) -o $(NAME)
-
-$(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR) all
 
 clean:
 	@rm -f $(OBJS) $(DEPS)

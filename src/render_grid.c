@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "../inc/render_grid.h"
 #include <ncursesw/curses.h>
-#include "colors.h"
+#include "../inc/colors.h"
 
 int	ft_count_digits(unsigned int n)
 {
@@ -68,8 +68,6 @@ void	color_cell(unsigned int grid_num, Cell *cell, int x, int y)
 	int start_y = 1 + y * (cell->h + 1);
 
 	short color = get_color(grid_num);
-
-
 
 	for (int row = 0; row < cell->h; row++){
 		move(start_y + row, start_x);

@@ -12,6 +12,10 @@
 #   define CHANCE_4 5 // Chance in % to get a 4 instead of 2
 # endif // CHANCE_4
 
+# undef KEY_ENTER
+# define KEY_ENTER 10
+# define KEY_ESCAPE 27
+
 enum e_dir {
     DOWN,
     UP,

@@ -13,11 +13,17 @@ enum e_states {
     ST_RESTART
 };
 
+enum e_menu {
+    FLD_PLAY,
+    FLD_SETT,
+    FLD_QUIT
+};
+
 typedef struct s_cell {
 
     int	w;
 	int	h;
-}	Cell;
+}   Cell;
 
 typedef struct s_data {
     uint8_t         grid_size;
@@ -29,6 +35,7 @@ typedef struct s_data {
     uint16_t        max_y;
     uint16_t        max_x;
     Set             empty_fields;
+    enum e_menu     menu_state;
 } Data;
 
 #endif // ! DATA_H

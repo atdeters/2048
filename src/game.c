@@ -83,6 +83,7 @@ void init(Data *data) {
 
     data->grid_size = INIT_GRID_SIZE;
     data->state = ST_MENU;
+    data->menu_state = FLD_PLAY;
 
     // Initialize ncurses
     srand(time(NULL));
@@ -131,7 +132,7 @@ void init(Data *data) {
     init_pair(P32768, COLOR_BLACK, CL15);
     init_pair(P65536, COLOR_BLACK, CL16);
     init_pair(PBACK, BACKGROUND, BACKGROUND);
-    init_pair(PGRID, GRID, GRID);
+    init_pair(PGRID, COLOR_BLACK, GRID);
 }
 
 void quit(void) {

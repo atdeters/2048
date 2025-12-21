@@ -10,10 +10,9 @@
 
 void play(Data *data) {
     getmaxyx(stdscr, data->grid_max_y, data->grid_max_x);
+    data->menu_state = FLD_PLAY;
     while(true) {
         render_grid(data, &data->cell);
-
-
         if (is_lost(data)) {
             move(1,1);
             printw("You lost the game!\n");
@@ -31,7 +30,7 @@ void play(Data *data) {
             data->state = ST_MENU;
             return;
         }
-        else if (ch == '\x1B') {
+        else if (ch == KEY_ESCAPE) {
             data->state = ST_EXIT;
             return;
         }
@@ -40,9 +39,6 @@ void play(Data *data) {
             return;
         }
 
-
-
-
         // Temporary grid
         unsigned int tmp[5][5];
         for (size_t i = 0; i < 5; i++) {
@@ -50,6 +46,7 @@ void play(Data *data) {
                 tmp[i][j] = data->grid[i][j];
             }
         }
+
 
         if (ch == KEY_LEFT || ch == 'a' || ch == 'A' || ch == 'h' || ch == 'H') {
             update_grid(data, LEFT);
@@ -63,6 +60,7 @@ void play(Data *data) {
         else if (ch == KEY_DOWN || ch == 's' || ch == 'S' || ch == 'j' || ch == 'J') {
             update_grid(data, DOWN);
         }
+
 
         // Checking with temporary grid
         bool didbreak = false;
