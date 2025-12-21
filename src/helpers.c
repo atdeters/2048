@@ -11,9 +11,25 @@ uint16_t min(uint16_t a, uint16_t b) {
     return b;
 }
 
+void	free_split(char **split)
+{
+	size_t	i;
+
+	i = 0;
+	if (!split)
+		return ;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 int	is_power_of_2(unsigned int n)
 {
 	unsigned int	i;
+
 
 	i = 1;
 	while (i <= n)

@@ -22,6 +22,7 @@ SRCS = \
 	src/state_play.c \
 	src/render_grid.c \
 	src/grid_manipulation.c \
+	src/ascii_digits.c \
 	src/colors.c \
 	src/set.c
 

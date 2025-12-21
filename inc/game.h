@@ -33,7 +33,6 @@ void run(Data *data);
 #include "state_menu.h"
 #include "state_play.h"
 #include "render_grid.h"
-
-
+#include "ascii_digits.h"
 
 #endif // ! GAME_H

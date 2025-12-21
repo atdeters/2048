@@ -77,7 +77,7 @@ void init_data(Data *data, uint8_t grid_size) {
 
 void init(Data *data) {
 
-	if (!is_power_of_2(WIN_VALUE))
+	if (WIN_VALUE < 0 || !is_power_of_2(WIN_VALUE))
 		exit(1);
     // Initialize game data
 
