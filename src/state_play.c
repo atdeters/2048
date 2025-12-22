@@ -8,7 +8,6 @@
 #include "../inc/colors.h"
 #include <ncurses.h>
 #include <stdint.h>
-#include <ncursesw/curses.h>
 #include "stdlib.h"
 #include <time.h>
 #include <stdarg.h>

@@ -1,7 +1,6 @@
 #include <ncurses.h>
 #include <stdint.h>
 #include "../inc/render_grid.h"
-#include <ncursesw/curses.h>
 #include "../inc/colors.h"
 #include "../inc/ascii_digits.h"
 

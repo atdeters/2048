@@ -9,8 +9,10 @@ OBJ_DIR     = obj
 INC_DIR     = inc
 INCLUDES    = -I$(INC_DIR)
 
+LIBFT_DIR   = src/libft
+LIBFT       = $(LIBFT_DIR)/libft.a
+
 LDLIBS      = -lncurses
-LIBFT		= src/libft.a
 
 SRCS = \
 	src/main.c \
@@ -30,7 +32,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS = $(OBJS:.o=.d)
 DEPFLAGS = -MMD -MP
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: re
@@ -49,12 +51,18 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/data.h
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDLIBS) -o $(NAME)
 
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR) all
+
 clean:
 	@rm -f $(OBJS) $(DEPS)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+
 
 re: fclean all
 
