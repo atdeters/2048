@@ -1,4 +1,4 @@
-# 🎞️ 42 Rush: Wong Kar-Wai (2048)
+# 🔢 42 Rush: Wong Kar-Wai (2048)
 
 Welcome to our **terminal-based (TUI)** implementation of the classic game  
 [**2048**](https://github.com/gabrielecirulli/2048) by Gabriele Cirulli — reimagined in C and playable entirely in the terminal.
@@ -12,7 +12,7 @@ hosted by [**42 Vienna**](https://www.42vienna.com/en/about-42/) with a strict t
 
 **Friday 6:42 PM → Sunday 11:42 PM**
 
-The goal? Work as a team, push your limits, experiment with new ideas, and build something complete from scratch under pressure.
+The goal? Work as a team, push your limits, experiment with new ideas, and build something completely from scratch under pressure.
 
 For this Rush, our task was to create our own version of **2048**, with the following constraints:
 
@@ -85,15 +85,16 @@ The game supports multiple input schemes for convenience:
 - **Vim-style navigation (HJKL)**
 
 **Menu access:**  
-Press `m` at any time to open the menu.  
+- Press `m` at any time to open the menu.  
+- Press `ESC` at any time to close the game gracefully.  
 All additional navigation keys are displayed directly inside the menu UI.
 
 **Movement keys:**
 
-- **Up:** Arrow Up, `W`, `K`  
-- **Down:** Arrow Down, `S`, `J`  
-- **Left:** Arrow Left, `A`, `H`  
-- **Right:** Arrow Right, `D`, `L`
+- **Up:** ,`↑`, `W`, `K`  
+- **Down:** `↓`, `S`, `J`  
+- **Left:** `←`, `A`, `H`  
+- **Right:** `→`, `D`, `L`
 
 ---
 
@@ -109,7 +110,8 @@ If you’re currently doing this Rush:
 
 ---
 
+
 ## 🙏 Thanks
 
-Thanks to **Gabriele Cirulli** for creating 2048, and to everyone at **42 Vienna** who supported and challenged us during this Rush.  
-This project was demanding, chaotic, and deeply rewarding — exactly what a Rush should be.
+Thanks to **Gabriele Cirulli** for creating 2048, and to **Veewo Studio** for *1024* and **Asher Vollmer** for *Threes!* — the games that inspired its original design.
+This project was demanding, chaotic, and deeply rewarding — exactly what a Rush should be!
